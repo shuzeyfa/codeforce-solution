@@ -1,33 +1,3 @@
-# for _ in range(int(input())):
-#     n = int(input())
-#     s = input()
-
-#     a = []
-#     b = []
-#     ind = 0
-
-#     while ind < n:
-#         if s[ind] == '0':
-#             a.append("0")
-#             b.append("0")
-#         elif s[ind] == '2':
-#             a.append("1")
-#             b.append("1")
-#         else:
-#             a.append("1")
-#             b.append("0")
-#             ind += 1
-#             break
-#         ind += 1
-    
-
-#     while ind < n:
-#         a.append("0")
-#         b.append(s[ind])
-#         ind += 1
-
-#     print("".join(a))
-#     print("".join(b))
 
 import sys, os
 import math
