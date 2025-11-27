@@ -12,7 +12,6 @@ def getStrSeq(): return sys.stdin.readline().strip().split()
 def getIntList(): return list(map(int, sys.stdin.readline().strip().split()))
 def getStrList(): return list(sys.stdin.readline().strip().split())
 
-t = getInt()
 
 def xor(n):
     if n%4 == 0:
@@ -80,38 +79,56 @@ def dp(ind, s):
           
 def solve():
     n = getInt()
-    a = getIntList()
-    b = getIntList()
-    
-    aj = m = False
-    val1 = val2 = 0
+    l = getIntList()
 
-    for i in range(n):
-        if i%2 == 0 and a[i] != b[i]:
-            aj = True
-            m = False
-        if i%2 == 1 and a[i] != b[i]:
-            m = True
-            aj = False
-        val1 ^= a[i]
-        val2 ^= b[i]
-            
-    if val1 ==  val2:
-        print("Tie")
+    if n == 2:
+        print(l[1] - l[0])
         return
+
+    left, right = 1, 10**18 - 1
+    ans = right
+
+    def check(val):
+        rem = 0
+
+        ind = 1
+
+        while ind < n:
+            
+            dif = l[ind] - l[ind-1]
+            if dif > val:
+                rem += 1
+                ind += 1
+                if n == ind:
+                    rem += 1
+            else:
+                ind += 2
+                if ind == n:
+                    rem += 1
+        return rem <= 1
+
+
+    while left <= right:
+
+        mid = (left + right) // 2
+
+        if check(mid):
+            ans = mid
+            right = mid - 1
+        else:
+            left = mid + 1
+    print(ans)
+
+
+
         
-    if aj == m == False:
-        if val1 > val2:
-            print("Ajisai")
-        elif val2 > val1:
-            print("Mai")
-        else:
-            print("Tie")
-    else:
-        if aj:
-            print("Ajisai")
-        else:
-            print("Mai")
+    
+
+
+    
+
+
+
                                   
     
 
@@ -125,15 +142,9 @@ def solve():
         
                      
     
-                      
+t = 1               
+t = getInt()
     
 for _ in range(t):
-    solve()#!/usr/bin/env python
-    # -*- coding: utf-8 -*-
-    # @Date    : 2025-11-21 22:32:40
-    # @Author  : shuzeyfa4@gmail.com (you@example.org)
-    # @Link    : link
-    # @Version : 1.0.0
-    
-    import os
+    solve()
     

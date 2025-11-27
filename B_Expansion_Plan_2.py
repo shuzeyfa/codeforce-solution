@@ -79,39 +79,33 @@ def dp(ind, s):
         
           
 def solve():
-    n = getInt()
-    a = getIntList()
-    b = getIntList()
-    
-    aj = m = False
-    val1 = val2 = 0
+    n, x, y = getIntList()
+    s = getStr()
+    x, y = abs(x), abs(y)
 
-    for i in range(n):
-        if i%2 == 0 and a[i] != b[i]:
-            aj = True
-            m = False
-        if i%2 == 1 and a[i] != b[i]:
-            m = True
-            aj = False
-        val1 ^= a[i]
-        val2 ^= b[i]
-            
-    if val1 ==  val2:
-        print("Tie")
+    if x > n or y > n:
+        print("NO")
         return
-        
-    if aj == m == False:
-        if val1 > val2:
-            print("Ajisai")
-        elif val2 > val1:
-            print("Mai")
-        else:
-            print("Tie")
-    else:
-        if aj:
-            print("Ajisai")
-        else:
-            print("Mai")
+
+    ans = 0
+
+    for i in s:
+        if i == "4":
+            ans += 1
+    
+
+    rem = x + y
+
+    if (n+n) - rem < ans:
+        print("NO")
+        return
+    print("YES")
+
+
+    
+
+
+
                                   
     
 
@@ -128,12 +122,5 @@ def solve():
                       
     
 for _ in range(t):
-    solve()#!/usr/bin/env python
-    # -*- coding: utf-8 -*-
-    # @Date    : 2025-11-21 22:32:40
-    # @Author  : shuzeyfa4@gmail.com (you@example.org)
-    # @Link    : link
-    # @Version : 1.0.0
-    
-    import os
+    solve()
     

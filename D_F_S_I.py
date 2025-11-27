@@ -12,7 +12,6 @@ def getStrSeq(): return sys.stdin.readline().strip().split()
 def getIntList(): return list(map(int, sys.stdin.readline().strip().split()))
 def getStrList(): return list(sys.stdin.readline().strip().split())
 
-t = getInt()
 
 def xor(n):
     if n%4 == 0:
@@ -77,41 +76,58 @@ def dp(ind, s):
         return dp(ind+1, s) + 1
     return dp(ind+1, s) + dp(ind+2, s) + 2     
         
-          
+       
 def solve():
-    n = getInt()
-    a = getIntList()
-    b = getIntList()
-    
-    aj = m = False
-    val1 = val2 = 0
+    n, d = getIntList()
+    rank = [0]*n
+    parent = {i:i for i in range(n)}
 
-    for i in range(n):
-        if i%2 == 0 and a[i] != b[i]:
-            aj = True
-            m = False
-        if i%2 == 1 and a[i] != b[i]:
-            m = True
-            aj = False
-        val1 ^= a[i]
-        val2 ^= b[i]
-            
-    if val1 ==  val2:
-        print("Tie")
-        return
+    def find(x):
+        while x != parent[x]:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+
+    def union(x,y):
+        rep1 = find(x)
+        rep2 = find(y)
+        if rep1 != rep2:
+            if rank[rep1] > rank[rep2]:
+                parent[rep2] = rep1
+                rank[rep1] += rank[rep2] + 1
+            elif rank[rep2] > rank[rep1]:
+                parent[rep1] = rep2
+                rank[rep2] += rank[rep1] + 1
+            else:
+                if rep1 <= rep2:
+                    parent[rep2] = rep1
+                    rank[rep1] += rank[rep2] + 1
+                else:
+                    parent[rep1] = rep2
+                    rank[rep2] += rank[rep1] + 1
+
+    # print(rank)
+    maxx = 1
+    for i in range(d):
+        u, v = getIntList()
+        union(u-1, v-1)
+        print(rank)
+        par = find(i)
+        maxx = max(maxx, rank[par])
+        print(maxx)  
+
+
+
+
+
         
-    if aj == m == False:
-        if val1 > val2:
-            print("Ajisai")
-        elif val2 > val1:
-            print("Mai")
-        else:
-            print("Tie")
-    else:
-        if aj:
-            print("Ajisai")
-        else:
-            print("Mai")
+    
+
+
+    
+
+
+
                                   
     
 
@@ -125,15 +141,9 @@ def solve():
         
                      
     
-                      
+t = 1               
+# t = getInt()
     
 for _ in range(t):
-    solve()#!/usr/bin/env python
-    # -*- coding: utf-8 -*-
-    # @Date    : 2025-11-21 22:32:40
-    # @Author  : shuzeyfa4@gmail.com (you@example.org)
-    # @Link    : link
-    # @Version : 1.0.0
-    
-    import os
+    solve()
     

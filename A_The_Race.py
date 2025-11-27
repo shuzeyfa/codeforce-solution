@@ -12,7 +12,6 @@ def getStrSeq(): return sys.stdin.readline().strip().split()
 def getIntList(): return list(map(int, sys.stdin.readline().strip().split()))
 def getStrList(): return list(sys.stdin.readline().strip().split())
 
-t = getInt()
 
 def xor(n):
     if n%4 == 0:
@@ -79,39 +78,27 @@ def dp(ind, s):
         
           
 def solve():
-    n = getInt()
-    a = getIntList()
-    b = getIntList()
-    
-    aj = m = False
-    val1 = val2 = 0
+    s, v1, v2, t1, t2 = getIntList()
 
-    for i in range(n):
-        if i%2 == 0 and a[i] != b[i]:
-            aj = True
-            m = False
-        if i%2 == 1 and a[i] != b[i]:
-            m = True
-            aj = False
-        val1 ^= a[i]
-        val2 ^= b[i]
-            
-    if val1 ==  val2:
-        print("Tie")
-        return
-        
-    if aj == m == False:
-        if val1 > val2:
-            print("Ajisai")
-        elif val2 > val1:
-            print("Mai")
-        else:
-            print("Tie")
+    val1 = 2*t1 + v1*s
+    val2 = 2*t2 + v2*s
+
+    if val1 < val2:
+        print("First")
+    elif val1 > val2:
+        print("Second")
     else:
-        if aj:
-            print("Ajisai")
-        else:
-            print("Mai")
+        print("Friendship")
+
+
+        
+    
+
+
+    
+
+
+
                                   
     
 
@@ -125,15 +112,9 @@ def solve():
         
                      
     
-                      
+t = 1               
+# t = getInt()
     
 for _ in range(t):
-    solve()#!/usr/bin/env python
-    # -*- coding: utf-8 -*-
-    # @Date    : 2025-11-21 22:32:40
-    # @Author  : shuzeyfa4@gmail.com (you@example.org)
-    # @Link    : link
-    # @Version : 1.0.0
-    
-    import os
+    solve()
     

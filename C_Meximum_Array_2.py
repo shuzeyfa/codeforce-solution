@@ -79,39 +79,58 @@ def dp(ind, s):
         
           
 def solve():
-    n = getInt()
-    a = getIntList()
-    b = getIntList()
-    
-    aj = m = False
-    val1 = val2 = 0
+    n, k, q = getIntList()
 
-    for i in range(n):
-        if i%2 == 0 and a[i] != b[i]:
-            aj = True
-            m = False
-        if i%2 == 1 and a[i] != b[i]:
-            m = True
-            aj = False
-        val1 ^= a[i]
-        val2 ^= b[i]
+    ans = [-1]*n
+    mex = []
+
+    for i in range(q):
+        c, left, right = getIntList()
+        if c == 1:
+            for i in range(left-1, right):
+                ans[i] = k
+        else:
+            mex.append([ left, right])
+    
+    for i in range(len(mex)):
+        left, right = mex[i]
+
+
+        for j in range(k):
+
+            for m in range(left-1, right):
+                if ans[m] == -1:
+                    ans[m] = j
+                    break
+
+    # print(ans)
+    val = k + 1
+    for i in range(len(mex)):
+        left, right = mex[i]
+        # print(left, right)
+
+        for j in range(left-1, right):
+            # print(ans[j], val)
             
-    if val1 ==  val2:
-        print("Tie")
-        return
+            if ans[j] == k or ans[j] == -1:
+                ans[j] = val
+                val += 1
+            # print(val)
+    for i in range(n):
+        if ans[i] == -1:
+            ans[i] = val
+            val += 1
+    print(*ans)
+
+
         
-    if aj == m == False:
-        if val1 > val2:
-            print("Ajisai")
-        elif val2 > val1:
-            print("Mai")
-        else:
-            print("Tie")
-    else:
-        if aj:
-            print("Ajisai")
-        else:
-            print("Mai")
+    
+
+
+    
+
+
+
                                   
     
 
@@ -128,12 +147,5 @@ def solve():
                       
     
 for _ in range(t):
-    solve()#!/usr/bin/env python
-    # -*- coding: utf-8 -*-
-    # @Date    : 2025-11-21 22:32:40
-    # @Author  : shuzeyfa4@gmail.com (you@example.org)
-    # @Link    : link
-    # @Version : 1.0.0
-    
-    import os
+    solve()
     
