@@ -78,14 +78,34 @@ def dp(ind, s):
         
           
 def solve():
-    n = getInt()
+    n, k = getIntList()
+    l = getIntList()
 
-    if n > 9 or n <= 1:
-        print(-1)
-        return
+    d = defaultdict(list)
+
+    for i in range(n):
+        d[l[i]].append(i+1)
     
-    
-    
+    ans = n - 1
+
+    for i in d:
+        
+        val = []
+        for j in range(len(d[i])):
+            if j == 0:
+                val.append(d[i][j] - 1)
+            else:
+                val.append(d[i][j] - d[i][j-1] - 1)
+        val.append(n - d[i][-1] )
+        # print(val)
+        maxx = max(val)
+        val.remove(maxx)
+        val.append(maxx // 2)
+        ans = min(ans, max(val))
+
+        
+    print(ans)
+        
 
 
         

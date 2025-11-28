@@ -12,7 +12,6 @@ def getStrSeq(): return sys.stdin.readline().strip().split()
 def getIntList(): return list(map(int, sys.stdin.readline().strip().split()))
 def getStrList(): return list(sys.stdin.readline().strip().split())
 
-t = getInt()
 
 def xor(n):
     if n%4 == 0:
@@ -144,7 +143,8 @@ def solve():
         
                      
     
-                      
+t = 1               
+t = getInt()
     
 for _ in range(t):
     solve()
