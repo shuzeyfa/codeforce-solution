@@ -1,0 +1,139 @@
+
+import sys, os
+import math
+from collections import defaultdict, deque, Counter
+from functools import lru_cache
+from bisect import bisect_right, bisect_left
+RANDOM = int.from_bytes(os.urandom(8), "big")
+def getInt(): return int(sys.stdin.readline().strip())
+def getStr(): return sys.stdin.readline().strip()
+def getIntSeq(): return map(int, sys.stdin.readline().strip().split())
+def getStrSeq(): return sys.stdin.readline().strip().split()
+def getIntList(): return list(map(int, sys.stdin.readline().strip().split()))
+def getStrList(): return list(sys.stdin.readline().strip().split())
+
+
+def xor(n):
+    if n%4 == 0:
+        return n
+    elif n%4 == 1:
+        return 1
+    elif n%4 == 2:
+        return n+1
+    else:
+        return 0
+        
+        
+     
+def longestcommonsubstring(s1, s2):
+    
+    maxlen = 0
+    end = 0
+    
+    n, m = len(s1), len(s2)
+    dp = [[0]*(m+1) for i in range(n+1)]
+    
+    for i in range(1,n+1):
+        for j in range(1, m+1):
+            if s1[i-1]==s2[j-1]:
+                dp[i][j] = dp[i-1][j-1] + 1
+                if dp[i][j] > maxlen:
+                    maxlen = dp[i][j]
+                    end = i
+    
+    print(s1[end-maxlen:end])
+    return maxlen                
+    
+
+def prime_numbers(n):
+    prime = [True]*(n+1)
+    prime[0] = False
+    prime[1] = False
+    for i in range(3, int(math.sqrt(n))+1 , 2):
+        if prime[i]:
+            for j in range(i*i, n+1, i):
+                prime[j] =False
+    
+    primes_num = [2] + [i for i in range(3, n+1, 2) if prime[i] == True]
+    return primes_num
+    
+    
+@lru_cache(None)    
+def dp(ind, s):
+    n = 2
+    if ind + 1 ==  n:
+        ans += 1
+        return 
+    if ind + 2 == n:
+        if s[ind] == s[ind+1]:
+            ans += 1
+            return 
+        else:
+            ans += 2
+            return  
+             
+    if s[ind] == s[ind+1]:
+        return dp(ind+1, s) + 1
+    return dp(ind+1, s) + dp(ind+2, s) + 2     
+        
+          
+def solve():
+    n = getInt()
+    if n == 1:
+        print(1)
+        return
+    
+    l = [[0]*n for i in range(n)]
+    val = 1
+
+    for i in range(n):
+        for j in range(n):
+            l[i][j] = val
+            val += 1
+    
+    # print(l)
+    maxx = 0
+
+    for i in range(n):
+        for j in range(n):
+            ans = 0
+            ans += l[i][j]
+
+            if i+1 < n:
+                ans += l[i+1][j]
+            if i-1 > -1:
+                ans += l[i-1][j]
+            if j+1 < n:
+                ans += l[i][j+1]
+            if j-1 > -1:
+                ans += l[i][j-1]
+            # print(ans)
+            # print(l[i][j-1], i, j)
+            # print(ans, i, j)
+            maxx = max(ans, maxx)
+    print(maxx)
+    
+    
+    
+
+
+
+                                  
+    
+
+
+          
+            
+               
+     
+                             
+    
+        
+                     
+    
+t = 1               
+t = getInt()
+    
+for _ in range(t):
+    solve()
+    
