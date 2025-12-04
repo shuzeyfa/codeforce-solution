@@ -75,7 +75,65 @@ def dp(ind, s):
              
     if s[ind] == s[ind+1]:
         return dp(ind+1, s) + 1
-    return dp(ind+1, s) + dp(ind+2, s) + 2     
+    return dp(ind+1, s) + dp(ind+2, s) + 2  
+
+# ====================== SEGMENT TREE TEMPLATE (SUM) ======================
+class SegmentTree:
+    def __init__(self, n, arr):
+        self.n = n
+        self.tree = [0] * (4 * n)
+        self.build(1, 0, n-1, arr)
+    
+    def build(self, node, start, end, arr):
+        if start == end:
+            self.tree[node] = arr[start]
+            return
+        mid = (start + end) // 2
+        self.build(2*node, start, mid, arr)
+        self.build(2*node+1, mid+1, end, arr)
+        self.tree[node] = self.tree[2*node] + self.tree[2*node+1]
+    
+    # Change arr[idx] = val
+    def update(self, node, start, end, idx, val):
+        if start == end:
+            self.tree[node] = val
+            return
+        mid = (start + end) // 2
+        if idx <= mid:
+            self.update(2*node, start, mid, idx, val)
+        else:
+            self.update(2*node+1, mid+1, end, idx, val)
+        self.tree[node] = self.tree[2*node] + self.tree[2*node+1]
+    
+    # Sum from l to r (0-based indices)
+    def query(self, node, start, end, l, r):
+        if r < start or end < l:
+            return 0
+        if l <= start and end <= r:
+            return self.tree[node]
+        mid = (start + end) // 2
+        return self.query(2*node, start, mid, l, r) + \
+               self.query(2*node+1, mid+1, end, l, r)
+
+"""
+we can use it like this 
+
+1 - To build
+
+    st = SegmentTree(n, arr)
+
+2 - update 
+    st.update(1, 0, n-1, idx, val)
+
+3 - query
+    print(st.query(1, 0, n-1, l, r))
+
+"""
+
+
+
+
+
         
           
 def solve():
