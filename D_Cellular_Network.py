@@ -11,7 +11,7 @@ def getIntSeq(): return map(int, sys.stdin.readline().strip().split())
 def getStrSeq(): return sys.stdin.readline().strip().split()
 def getIntList(): return list(map(int, sys.stdin.readline().strip().split()))
 def getStrList(): return list(sys.stdin.readline().strip().split())
-
+sys.setrecursionlimit(200000)
 t = 1
 
 def xor(n):

@@ -11,7 +11,7 @@ def getIntSeq(): return map(int, sys.stdin.readline().strip().split())
 def getStrSeq(): return sys.stdin.readline().strip().split()
 def getIntList(): return list(map(int, sys.stdin.readline().strip().split()))
 def getStrList(): return list(sys.stdin.readline().strip().split())
-
+sys.setrecursionlimit(200000)
 t = 1
 
 def xor(n):
@@ -61,6 +61,7 @@ def prime_numbers(n):
     
 @lru_cache(None)    
 def dp(ind, s):
+    n = 3
     
     if ind + 1 ==  n:
         ans += 1
@@ -112,8 +113,7 @@ class SegmentTree:
         if l <= start and end <= r:
             return self.tree[node]
         mid = (start + end) // 2
-        return self.query(2*node, start, mid, l, r) + \
-               self.query(2*node+1, mid+1, end, l, r)
+        return self.query(2*node, start, mid, l, r) + self.query(2*node+1, mid+1, end, l, r)
 
 """
 we can use it like this 
@@ -128,11 +128,15 @@ we can use it like this
 3 - query
     print(st.query(1, 0, n-1, l, r))
 
+
+arr = [2,4,5,7,8]
+st = SegmentTree(len(arr), arr) # building example
+print(st.tree)
+st.update(1, 0, st.n - 1, 2, 100) #Update example
+print(st.tree)
+print(st.query(1, 0, st.n - 1, 2, 4)) # query Example
+
 """
-
-
-
-
 
         
           

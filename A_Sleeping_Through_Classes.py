@@ -61,7 +61,6 @@ def prime_numbers(n):
     
 @lru_cache(None)    
 def dp(ind, s):
-    n = 3
     
     if ind + 1 ==  n:
         ans += 1
@@ -136,61 +135,42 @@ we can use it like this
 
 
         
-def find(l):
-    l.sort(key=lambda x: x[0])
-    final = []
-
-    for _, j in l:
-        final.append(j)
-    
-    def count(leftList, rightList):
-        inversion = 0
-
-        i = j = 0
-        merged = []
-
-        while i < len(leftList) and j < len(rightList):
-            if leftList[i] < rightList[j]:
-                merged.append(leftList[i])
-                i += 1
-            else:
-                merged.append(rightList[j])
-                inversion += len(leftList) - i
-                j += 1
-        merged += leftList[i:]
-        merged += rightList[j:]
-        return merged, inversion
-
-    
-    def merge(final):
-        if len(final) <= 1:
-            return final, 0
-
-        mid = len(final) // 2
-        left, left_inv = merge(final[:mid])
-        right, right_inv = merge(final[mid:])
-
-        merged, inv_merge = count(left, right)
-    
-        return merged, left_inv + right_inv + inv_merge
-        
-    
-    _, inversion = merge(final)
-    return inversion
-
-
-
+          
 def solve():
-    n = getInt()
+    
+    n, k = getIntList()
+    s = getStr()
 
-    l = []
+    ans = 0
+
+    ind = 0
+
+    l = list(s)
+    ind = []
     for i in range(n):
-        u, v = getIntList()
-        l.append((u, v))
+        if l[i] == "1":
+            ind.append(i)
     
-    
-    print(find(l))
-    
+    for i in range(len(ind)):
+        j = ind[i] + 1
+        count = 0
+        
+
+        while j < n:
+            if count == k:
+                break
+            if l[j] == "0":
+                l[j] = "1"
+            j += 1
+            count += 1
+    ans = 0
+    for i in l:
+        if i == "0":
+            ans += 1
+    print(ans)
+
+
+
     
                 
 
