@@ -12,6 +12,8 @@ def getStrSeq(): return sys.stdin.readline().strip().split()
 def getIntList(): return list(map(int, sys.stdin.readline().strip().split()))
 def getStrList(): return list(sys.stdin.readline().strip().split())
 
+sys.setrecursionlimit(4000)
+
 
 t = 1
 t = getInt()
@@ -21,41 +23,40 @@ t = getInt()
 def solve():
     n = getInt()
     l = getIntList()
+    s = getStr()
 
-    if n == 1:
-        print("NO")
-        return
+    d = defaultdict(list)
 
-    if n == 2:
-        if l[0] == l[1]:
-            print("YES")
+    for i in range(n-1):
+        d[l[i]].append(i+2)
+
+    ans = 0
+
+    def dfs(par):
+        nonlocal ans
+
+        black = white = 0
+
+        for child in d[par]:
+
+            w, b = dfs(child)
+
+            white += w
+            black += b
+        
+        if s[par-1] == "W":
+            white += 1
         else:
-            print("NO")
-        return
+            black += 1
 
-    odd = even = 0
+        if white == black:
+            ans += 1
+        
+        return white, black
 
-    s = []
-    s.append(0)
 
-    for i in range(n):
-        if i%2 == 0:
-            odd += l[i]
-        else:
-            even += l[i]
-
-        dif = odd - even
-        s.append(dif)
-    
-    s.sort()
-
-    for i in range(1, len(s)):
-        if s[i] == s[i-1]:
-            print("YES")
-            return
-
-    print("NO")     
-                                  
+    dfs(1)   
+    print(ans)                               
     
 
 

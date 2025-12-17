@@ -22,39 +22,23 @@ def solve():
     n = getInt()
     l = getIntList()
 
-    if n == 1:
-        print("NO")
-        return
-
-    if n == 2:
-        if l[0] == l[1]:
-            print("YES")
-        else:
-            print("NO")
-        return
-
-    odd = even = 0
-
-    s = []
-    s.append(0)
+    ans = []
 
     for i in range(n):
-        if i%2 == 0:
-            odd += l[i]
-        else:
-            even += l[i]
+        res = 1
+        left, right = 1, i + 1
 
-        dif = odd - even
-        s.append(dif)
-    
-    s.sort()
+        while left <= right:
 
-    for i in range(1, len(s)):
-        if s[i] == s[i-1]:
-            print("YES")
-            return
-
-    print("NO")     
+            mid = (left + right) // 2
+        
+            if l[i - mid + 1] >= mid:
+                res = mid
+                left = mid + 1
+            else:
+                right = mid - 1
+        ans.append(res)
+    print(*ans)
                                   
     
 

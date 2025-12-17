@@ -19,42 +19,30 @@ t = getInt()
    
           
 def solve():
-    n = getInt()
-    l = getIntList()
+    n, m = getIntList()
 
-    if n == 1:
-        print("NO")
-        return
+    freind = getIntList()
+    cost = getIntList()
 
-    if n == 2:
-        if l[0] == l[1]:
-            print("YES")
-        else:
-            print("NO")
-        return
+    freind.sort(reverse=True)
 
-    odd = even = 0
+    ind = 0
+    ans = 0
 
-    s = []
-    s.append(0)
+    while ind < n and ind < m:
 
-    for i in range(n):
-        if i%2 == 0:
-            odd += l[i]
-        else:
-            even += l[i]
+        if cost[freind[ind]-1] <= cost[ind]:
+            break
 
-        dif = odd - even
-        s.append(dif)
-    
-    s.sort()
+        ans += cost[ind]
+        ind += 1
 
-    for i in range(1, len(s)):
-        if s[i] == s[i-1]:
-            print("YES")
-            return
+    while ind < n:
 
-    print("NO")     
+        ans += cost[freind[ind]-1]
+        ind += 1
+
+    print(ans)     
                                   
     
 

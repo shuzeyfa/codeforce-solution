@@ -19,45 +19,23 @@ t = getInt()
    
           
 def solve():
-    n = getInt()
+    n, k =getIntList()
     l = getIntList()
 
-    if n == 1:
-        print("NO")
-        return
+    ans = 0
 
-    if n == 2:
-        if l[0] == l[1]:
-            print("YES")
-        else:
-            print("NO")
-        return
+    for i in range(30, -1, -1):
+        rem = 0
 
-    odd = even = 0
+        val =  (1 << i)  
+        for j in l:
+            if val & j == 0:
+                rem += 1
+        if rem <= k:
+            ans += val
+            k -= rem
 
-    s = []
-    s.append(0)
-
-    for i in range(n):
-        if i%2 == 0:
-            odd += l[i]
-        else:
-            even += l[i]
-
-        dif = odd - even
-        s.append(dif)
-    
-    s.sort()
-
-    for i in range(1, len(s)):
-        if s[i] == s[i-1]:
-            print("YES")
-            return
-
-    print("NO")     
-                                  
-    
-
+    print(ans)
 
           
             

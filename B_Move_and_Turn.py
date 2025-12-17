@@ -14,47 +14,39 @@ def getStrList(): return list(sys.stdin.readline().strip().split())
 
 
 t = 1
-t = getInt()
+# t = getInt()
 
    
           
 def solve():
     n = getInt()
-    l = getIntList()
 
-    if n == 1:
-        print("NO")
-        return
+    vertical = set()
+    horizontal = set()
 
-    if n == 2:
-        if l[0] == l[1]:
-            print("YES")
-        else:
-            print("NO")
-        return
+    vertical.add((0, -1))
+    vertical.add((0, 1))
 
-    odd = even = 0
+    horizontal.add((1, 0))
+    horizontal.add((-1, 0))
 
-    s = []
-    s.append(0)
+    for i in range(2, n+1):
 
-    for i in range(n):
-        if i%2 == 0:
-            odd += l[i]
-        else:
-            even += l[i]
+        new_vert = set()
+        new_hor = set()
 
-        dif = odd - even
-        s.append(dif)
+        for x, y in vertical:
+            new_hor.add((x+1, y))
+            new_hor.add((x-1, y))
+        
+        for x, y in horizontal:
+            new_vert.add((x, y+1))
+            new_vert.add((x, y-1))
+        
+        vertical = new_vert
+        horizontal = new_hor
     
-    s.sort()
-
-    for i in range(1, len(s)):
-        if s[i] == s[i-1]:
-            print("YES")
-            return
-
-    print("NO")     
+    print(len(vertical | horizontal))
                                   
     
 

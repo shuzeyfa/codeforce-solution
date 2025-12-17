@@ -4,6 +4,7 @@ import math
 from collections import defaultdict, deque, Counter
 from functools import lru_cache
 from bisect import bisect_right, bisect_left
+from heapq import heappop, heappush
 RANDOM = int.from_bytes(os.urandom(8), "big")
 def getInt(): return int(sys.stdin.readline().strip())
 def getStr(): return sys.stdin.readline().strip()
@@ -19,43 +20,26 @@ t = getInt()
    
           
 def solve():
-    n = getInt()
-    l = getIntList()
+    n, k = getIntList()
 
-    if n == 1:
-        print("NO")
-        return
-
-    if n == 2:
-        if l[0] == l[1]:
-            print("YES")
-        else:
-            print("NO")
-        return
-
-    odd = even = 0
-
-    s = []
-    s.append(0)
+    l = []
 
     for i in range(n):
-        if i%2 == 0:
-            odd += l[i]
-        else:
-            even += l[i]
+        left, right, real = getIntList()
+        l.append((left, right, real))
 
-        dif = odd - even
-        s.append(dif)
+    l.sort(key=lambda x:(x[0], -x[1], -x[2]))
+
+    ans = k
+
+    for i in range(n):
+        left, right, real = l[i]
+        if left <= ans <= right:
+            ans = max(real, ans)
+        
+    print(ans)
+
     
-    s.sort()
-
-    for i in range(1, len(s)):
-        if s[i] == s[i-1]:
-            print("YES")
-            return
-
-    print("NO")     
-                                  
     
 
 

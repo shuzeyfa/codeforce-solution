@@ -20,41 +20,25 @@ t = getInt()
           
 def solve():
     n = getInt()
-    l = getIntList()
 
-    if n == 1:
-        print("NO")
-        return
+    a = getIntList()
+    b = getIntList()
 
-    if n == 2:
-        if l[0] == l[1]:
-            print("YES")
-        else:
-            print("NO")
-        return
-
-    odd = even = 0
-
-    s = []
-    s.append(0)
+    dif = []
 
     for i in range(n):
-        if i%2 == 0:
-            odd += l[i]
-        else:
-            even += l[i]
+        dif.append(a[i] - b[i])
 
-        dif = odd - even
-        s.append(dif)
-    
-    s.sort()
+    maxx = max(dif)
 
-    for i in range(1, len(s)):
-        if s[i] == s[i-1]:
-            print("YES")
-            return
+    ans = []
 
-    print("NO")     
+    for i in range(n):
+        if dif[i] == maxx:
+            ans.append(i+1)
+
+    print(len(ans))
+    print(*ans)     
                                   
     
 

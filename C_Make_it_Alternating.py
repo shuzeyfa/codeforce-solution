@@ -19,42 +19,36 @@ t = getInt()
    
           
 def solve():
-    n = getInt()
-    l = getIntList()
+    s = getStr()
 
-    if n == 1:
-        print("NO")
-        return
+    fact = 0
 
-    if n == 2:
-        if l[0] == l[1]:
-            print("YES")
-        else:
-            print("NO")
-        return
+    mul = 1
 
-    odd = even = 0
+    ind = 0
+    mod =  998244353
 
-    s = []
-    s.append(0)
+    while ind < len(s):
 
-    for i in range(n):
-        if i%2 == 0:
-            odd += l[i]
-        else:
-            even += l[i]
+        val = s[ind]
+        count = 0
 
-        dif = odd - even
-        s.append(dif)
+        while ind < len(s) and s[ind] == val:
+            count += 1
+            ind += 1
+        
+        mul = (mul * (count%mod)) % mod
+        fact += count - 1
     
-    s.sort()
+    ans = 1
 
-    for i in range(1, len(s)):
-        if s[i] == s[i-1]:
-            print("YES")
-            return
+    for i in range(2, fact+1):
+        ans = (ans * (i%mod)) % mod
+    print(fact, (ans * mul) % mod)
 
-    print("NO")     
+
+
+       
                                   
     
 

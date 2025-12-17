@@ -20,41 +20,28 @@ t = getInt()
           
 def solve():
     n = getInt()
-    l = getIntList()
+    l = []
 
-    if n == 1:
-        print("NO")
-        return
-
-    if n == 2:
-        if l[0] == l[1]:
-            print("YES")
-        else:
-            print("NO")
-        return
-
-    odd = even = 0
-
-    s = []
-    s.append(0)
+    d = defaultdict(int)
 
     for i in range(n):
-        if i%2 == 0:
-            odd += l[i]
-        else:
-            even += l[i]
-
-        dif = odd - even
-        s.append(dif)
+        temp = getIntList()
+        l.append(temp)
+        for j in range(1, temp[0]+1):
+            d[temp[j]] += 1
     
-    s.sort()
-
-    for i in range(1, len(s)):
-        if s[i] == s[i-1]:
-            print("YES")
+    for i in range(n):
+        temp = l[i]
+        t = True
+        for j in range(1, temp[0]+1):
+            if d[temp[j]] <= 1:
+                t = False
+                break
+        if t:
+            print("Yes")
             return
+    print("No")
 
-    print("NO")     
                                   
     
 
