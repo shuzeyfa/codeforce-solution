@@ -14,12 +14,39 @@ def getStrList(): return list(sys.stdin.readline().strip().split())
 
 
 t = 1
-t = getInt()
+# t = getInt()
 
    
           
 def solve():
-    pass     
+    n, k = getIntList()
+    l = getIntList()
+
+    left, right = 1, n
+
+    def check(num):
+        arr = l[:num]
+        arr.sort()
+        summ = 0
+        
+        ind = len(arr) - 1
+
+        while ind >= 0:
+            summ += arr[ind]
+            ind -= 2
+        return summ <= k
+
+    ans = left
+
+    while left <= right:
+        mid = (left + right) // 2
+        if check(mid):
+            ans = mid 
+            left = mid + 1
+        else:
+            right = mid - 1
+    print(ans)
+
                                   
     
 

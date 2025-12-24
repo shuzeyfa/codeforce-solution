@@ -12,14 +12,59 @@ def getStrSeq(): return sys.stdin.readline().strip().split()
 def getIntList(): return list(map(int, sys.stdin.readline().strip().split()))
 def getStrList(): return list(sys.stdin.readline().strip().split())
 
-
 t = 1
-t = getInt()
+# t = getInt()
 
    
           
 def solve():
-    pass     
+
+    n = getInt()
+
+    d = defaultdict(list)
+
+    for i in range(n-1):
+        u, v = getIntList()
+        d[u].append(v)
+        d[v].append(u)
+    
+    visited = [False]*n
+
+    
+    
+    q = deque()
+    q.append((1, 1))
+    red = black = 0
+
+    while q:
+        cur, color = q.popleft()
+
+        if color == 1:
+            black += 1
+        else:
+            red += 1
+        visited[cur-1] = True
+        
+        for child in d[cur]:
+            if not visited[child-1]:
+                q.append((child, 1 - color))
+    print(red*black - (n-1))
+            
+
+
+    
+
+    # print(red, black)
+    
+
+
+
+
+
+    
+
+
+    
                                   
     
 

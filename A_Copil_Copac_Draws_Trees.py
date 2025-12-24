@@ -19,10 +19,43 @@ t = getInt()
    
           
 def solve():
-    pass     
-                                  
-    
+    n = getInt()
 
+    d = defaultdict(list)
+    ind = defaultdict(int)
+
+    ans = [0]*(n+1)
+    ans[0] = ans[1] = 1
+
+    for i in range(n-1):
+        u, v = getIntList()
+        d[u].append(v)
+        d[v].append(u)
+        ind[(u, v)] = i
+        ind[(v, u)] = i
+    
+    q = deque()
+    q.append((1, -1))
+    ind[(1, -1)] = -1
+
+    while q:
+
+        vertex, par = q.popleft()
+
+        parentindex = ind.get((vertex, par), -1)
+
+
+        for i in d[vertex]:
+            if i == par:
+                continue
+            childindex = ind[(i, vertex)]
+            ans[i] = ans[vertex] if parentindex < childindex else ans[vertex] + 1
+            q.append((i, vertex))
+    
+    print(max(ans))
+
+
+    
 
           
             

@@ -59,7 +59,7 @@ def solve():
             sum_mid =  prea[mid] + preb[z - mid] 
             sum_prev = -1
             if mid > minn:
-                sum_prev = prea[mid - 1] + preb[z - (mid - 1)] if (mid - 1) <= n and (z - mid + 1) <= m else -1
+                sum_prev = prea[mid - 1] + preb[z - (mid - 1)]
             
             if sum_mid >= sum_prev:
                 # Current is better or equal, try larger k

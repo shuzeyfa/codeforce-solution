@@ -14,12 +14,24 @@ def getStrList(): return list(sys.stdin.readline().strip().split())
 
 
 t = 1
-t = getInt()
+# t = getInt()
 
    
           
 def solve():
-    pass     
+    n = getInt()
+
+    x, y = getIntList()
+
+    w = max(x - 1, y - 1)
+    b = max(n - x, n - y)
+
+    if w <= b:
+        print("White")
+    else:
+        print("Black")
+
+     
                                   
     
 

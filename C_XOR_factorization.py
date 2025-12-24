@@ -19,7 +19,20 @@ t = getInt()
    
           
 def solve():
-    pass     
+    n, k  = getIntList()
+
+    if k%2 == 0:
+        ans = [n]*(k-1)
+        ans.append(0)
+        print(*ans)
+    else:
+        ans =[n]*k
+        print(*ans)
+
+
+
+
+
                                   
     
 

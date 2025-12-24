@@ -19,7 +19,46 @@ t = getInt()
    
           
 def solve():
-    pass     
+    n = getInt()
+    l = getIntList()
+
+    b = [[0]*30 for i in range(n+1)]
+
+    for i in range(n):
+        for j in range(30):
+            b[i+1][j] = b[i][j] + ((l[i] >> j) & 1)
+    
+    query = getInt()
+    # print(b[1][4])
+    final = []
+    for x in range(query):
+        left, k = getIntList()
+
+        if l[left-1] < k:
+            final.append(-1)
+            continue
+
+        L = left
+        lo = left
+        hi = n
+        ans = left
+
+        while lo <= hi:
+            mid = (lo + hi) // 2
+            temp = 0
+
+            for j in range(30):
+                if b[mid][j] - b[L-1][j] == mid - L + 1:
+                    temp |= (1 << j)
+
+            if temp >= k:
+                ans = mid
+                lo = mid + 1
+            else:
+                hi = mid - 1
+
+        final.append(ans)
+    print(*final)
                                   
     
 

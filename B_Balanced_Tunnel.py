@@ -14,14 +14,38 @@ def getStrList(): return list(sys.stdin.readline().strip().split())
 
 
 t = 1
-t = getInt()
+# t = getInt()
 
    
           
 def solve():
-    pass     
-                                  
-    
+    n = getInt()
+
+    a = getIntList()
+    b = getIntList()
+
+    a.reverse()
+    b.reverse()
+
+    d = defaultdict(int)
+
+    for i in range(n):
+        d[a[i]] = i
+
+    final = -1
+
+    ans = 0
+
+    for i in b:
+        ind = d[i]
+
+        if ind > final:
+            final = ind
+        else:
+            ans += 1
+            # final = ind
+    print(ans)
+
 
 
           

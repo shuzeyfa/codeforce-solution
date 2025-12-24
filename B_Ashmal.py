@@ -19,7 +19,22 @@ t = getInt()
    
           
 def solve():
-    pass     
+    n = getInt()
+    l = getStrList()
+    
+    
+    val = l[0]
+
+    for i in range(1, n):
+
+        val = min(val+l[i], l[i]+val)
+        
+    print(val)
+
+
+
+
+
                                   
     
 

@@ -14,12 +14,27 @@ def getStrList(): return list(sys.stdin.readline().strip().split())
 
 
 t = 1
-t = getInt()
+# t = getInt()
 
    
           
 def solve():
-    pass     
+    s = getStr()   
+    n = len(s)  
+
+    l = list(s)
+
+    for i in range(1, n):
+        if l[i] != l[i-1]:
+            continue
+
+        for j in "abcdefghijklmnopqrstuvwxyz":
+            if j != l[i-1] and (i+1 == n or l[i+1] != j):
+                l[i] = j
+                break
+    print("".join(l))
+
+
                                   
     
 

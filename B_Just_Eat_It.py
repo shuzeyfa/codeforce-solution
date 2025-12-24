@@ -19,7 +19,52 @@ t = getInt()
    
           
 def solve():
-    pass     
+    n = getInt()
+    l = getIntList()
+
+    check = True
+
+    for i in l:
+        if i < 0:
+            check = False
+            break
+    if check and l[0] != 0 and l[-1] != 0:
+        print("YES")
+        return
+
+    summ = sum(l)
+
+    maxx = float("-inf")
+    count = 0
+
+    for i in range(n-1):
+        count += l[i]
+        maxx = max(maxx, count)
+
+        if count < 0:
+            count = 0
+
+        if maxx >= summ:
+            print("NO")
+            return
+    
+    maxx = float("-inf")
+    count = 0
+
+    for i in range(1, n):
+        count += l[i]
+        maxx = max(maxx, count)
+
+        if count < 0:
+            count = 0
+
+        if maxx >= summ:
+            print("NO")
+            return
+    print("YES")
+
+
+
                                   
     
 

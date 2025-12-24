@@ -19,8 +19,29 @@ t = getInt()
    
           
 def solve():
-    pass     
-                                  
+    n = getInt()
+
+    ans = []
+
+    val = 2**(n) - 1
+    visited = [False]*(2**n )
+
+    ans.append(val)
+    visited[val] = True
+    val //= 2
+
+    while val > -1:
+
+        for i in range(2**n):
+            if  not visited[i] and (i & val) >= val:
+                ans.append(i)
+                visited[i] = True
+        if val == 0:
+            break
+        val //= 2
+
+    print(*ans)    
+    # print(len(ans))                
     
 
 

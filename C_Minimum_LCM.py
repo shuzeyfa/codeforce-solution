@@ -19,7 +19,28 @@ t = getInt()
    
           
 def solve():
-    pass     
+    n = getInt()
+
+    if n%2 == 0:
+        print(n//2, n//2)
+        return
+    
+    def find(num):
+        div = 2
+
+        while div*div <= num:
+            if num%div == 0:
+                return div
+            div += 1
+        return num
+
+    val = find(n)     
+    if val == n:
+        print(1, n-1)
+        return
+    
+    a = n // val
+    print(a, n-a)
                                   
     
 

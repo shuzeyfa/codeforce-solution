@@ -19,7 +19,19 @@ t = getInt()
    
           
 def solve():
-    pass     
+    k, x = getIntList()
+
+    def check(num):
+        val = math.ceil(num / x)
+        return val <= k
+
+    first = 1
+    while True:
+        if not check(first):
+            print(first)
+            return
+        first += 1    
+
                                   
     
 

@@ -21,32 +21,15 @@ t = 1
 def solve():
     n = getInt()
 
-    vertical = set()
-    horizontal = set()
+    if n%2 == 0:
+        val = ( n // 2 + 1) ** 2
+        print(val)
 
-    vertical.add((0, -1))
-    vertical.add((0, 1))
 
-    horizontal.add((1, 0))
-    horizontal.add((-1, 0))
-
-    for i in range(2, n+1):
-
-        new_vert = set()
-        new_hor = set()
-
-        for x, y in vertical:
-            new_hor.add((x+1, y))
-            new_hor.add((x-1, y))
         
-        for x, y in horizontal:
-            new_vert.add((x, y+1))
-            new_vert.add((x, y-1))
-        
-        vertical = new_vert
-        horizontal = new_hor
-    
-    print(len(vertical | horizontal))
+    else:
+        val = (n // 2 + 1) * (n // 2 + 2)
+        print(2*val)
                                   
     
 

@@ -19,7 +19,24 @@ t = getInt()
    
           
 def solve():
-    pass     
+    n = getStr()
+    ans = 1
+    t = True
+    for i in n:
+        if i != "1" and i != "0":
+            t = False
+            break
+    if t:
+        print(1)
+        return
+
+    for i in n:
+        if i >= "1":
+            temp = int(i) - 1
+            ans = max(ans, temp)
+    print(ans+1)
+
+     
                                   
     
 

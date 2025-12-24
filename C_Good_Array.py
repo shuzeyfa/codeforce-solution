@@ -14,12 +14,45 @@ def getStrList(): return list(sys.stdin.readline().strip().split())
 
 
 t = 1
-t = getInt()
+# t = getInt()
 
    
           
 def solve():
-    pass     
+    n = getInt()
+    l = getIntList()
+
+    s = set()
+    original = l[:]
+
+    summ = sum(l)
+    l.sort()
+
+    for i in range(n):
+        if l[i] in s:
+            continue
+        rem = summ - l[i] 
+        if l[i] == l[-1]:
+            another = l[-2]
+        else:
+            another = l[-1]
+        
+        if rem - another == another:
+            s.add(l[i])
+    
+    ans = []
+    # print(s)
+
+    for i in range(n):
+        if original[i] in s:
+            ans.append(i+1)
+    if len(ans) == 0:
+        print(0)
+        return
+
+    print(len(ans))
+    print(*ans)
+
                                   
     
 

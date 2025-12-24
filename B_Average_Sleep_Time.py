@@ -14,12 +14,32 @@ def getStrList(): return list(sys.stdin.readline().strip().split())
 
 
 t = 1
-t = getInt()
+# t = getInt()
 
    
           
 def solve():
-    pass     
+    n, k = getIntList()   
+    l = getIntList()
+
+    pre = [l[0]]
+
+    for i in range(1, n):
+        pre.append(pre[-1] + l[i])
+
+
+    ind = 0
+    ans = 0
+
+    while ind < n-k+1:
+        rem = pre[ind+k-1] - pre[ind-1] if ind > 0 else pre[ind+k-1]
+        ans += rem
+        ind += 1
+    print(ans/(n-k+1))
+        
+
+
+
                                   
     
 

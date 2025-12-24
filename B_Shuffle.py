@@ -19,7 +19,25 @@ t = getInt()
    
           
 def solve():
-    pass     
+    n, x, m = getIntList()
+
+    get = False
+    left, right = -1, -1
+
+    for i in range(m):
+        left2, right2 = getIntList()
+
+        if left2 <= x <= right2 and not get:
+            get = True
+            left, right = left2, right2
+            continue
+
+        if left2 > right or right2 < left:
+            continue
+
+        left, right = min(left, left2), max(right,  right2)
+
+    print(right - left + 1)     
                                   
     
 

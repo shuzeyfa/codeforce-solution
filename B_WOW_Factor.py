@@ -14,21 +14,35 @@ def getStrList(): return list(sys.stdin.readline().strip().split())
 
 
 t = 1
-t = getInt()
+# t = getInt()
 
    
           
 def solve():
-    pass     
-                                  
-    
+    s = getStr()
+    n = len(s)
 
+    pre = [0]*n
+    suf = [0]*n
 
-          
-            
-               
-     
-                             
+    count = 0
+    for i in range(1, n):
+        if s[i] == "v" and s[i-1] == "v":
+            count += 1
+        pre[i] = count
+
+    count = 0
+    for i in range(n-2, -1,  -1):
+        if s[i] == "v" and s[i+1] == "v":
+            count += 1
+        suf[i] = count
+
+    ans = 0
+    for i in range(n):
+        if s[i] == "o":
+            ans += (suf[i]*pre[i])
+    print(ans)
+                       
     
         
                      

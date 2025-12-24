@@ -19,7 +19,11 @@ t = getInt()
    
           
 def solve():
-    pass     
+    l, a, b = getIntList() 
+
+    g = math.gcd(l, b)
+    ans = a + ((l - 1 - a) // g) * g
+    print(ans)
                                   
     
 

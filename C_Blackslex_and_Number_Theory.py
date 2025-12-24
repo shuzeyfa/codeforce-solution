@@ -19,7 +19,32 @@ t = getInt()
    
           
 def solve():
-    pass     
+    n = getInt()
+    l = getIntList()
+    l.sort()
+    # print(l)
+    
+
+    left, right = min(l) + 1, 10**9
+    ans = min(l)
+
+    def check(num):
+        for i in range(1, n):
+            rem = l[i] - num
+            if rem < l[0]:
+                return False
+        return True
+    # print(check(6))
+
+    while left <= right:
+        mid = (left + right) // 2
+        if check(mid):
+            ans = mid
+            left = mid + 1
+        else:
+            right = mid - 1
+    print(ans)
+
                                   
     
 

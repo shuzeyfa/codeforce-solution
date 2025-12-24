@@ -19,9 +19,30 @@ t = getInt()
    
           
 def solve():
-    pass     
-                                  
-    
+    n, k = getIntList()
+    a = getIntList()
+    h = getIntList()
+
+    ans = 0
+    left = 0
+    curr_sum = 0
+
+    for right in range(n):
+        curr_sum += a[right]
+
+        if right > 0 and h[right-1] % h[right] != 0:
+            left = right
+            curr_sum = a[right]
+
+        while curr_sum > k:
+            curr_sum -= a[left]
+            left += 1
+
+        ans = max(ans, right - left + 1)
+
+    print(ans)
+ 
+
 
 
           

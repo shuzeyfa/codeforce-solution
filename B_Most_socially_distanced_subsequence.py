@@ -19,8 +19,32 @@ t = getInt()
    
           
 def solve():
-    pass     
-                                  
+    n = getInt()
+    l = getIntList()
+
+    ans = [l[0]]
+
+    dec = True if l[1] < l[0] else False
+
+    ind = 1
+
+    while ind < n:
+
+        if dec:
+            while ind < n and l[ind] < l[ind-1]:
+                ind += 1
+                
+            ans.append(l[ind-1])
+            dec = not dec   
+        else:
+            while ind < n and l[ind] > l[ind-1]:
+                ind += 1
+                
+            ans.append(l[ind-1])
+            dec = not dec   
+
+    print(len(ans))   
+    print(*ans)              
     
 
 
