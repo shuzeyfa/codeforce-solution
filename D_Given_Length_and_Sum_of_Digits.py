@@ -14,30 +14,51 @@ def getStrList(): return list(sys.stdin.readline().strip().split())
 
 
 t = 1
-t = getInt()
+# t = getInt()
 
    
           
 def solve():
-    n, m = getIntList()
+    a, b = getIntList()
 
-    mn = [n] * (n + 2)
+    if b == 0:
+        print("0 0" if a == 1 else "-1 -1")
+        return
 
-    for _ in range(m):
-        u, v = getIntList()
-        if u > v:
-            u, v = v, u
-        mn[u] = min(mn[u], v - 1)
+    if b < 1 or b > 9*a:
+        print(-1, -1)
+        return
+    
+    mul = b // 9
+    rem = b % 9
 
-    for i in range(n - 1, 0, -1):
-        mn[i] = min(mn[i], mn[i + 1])
+    if rem == 0:
+        rem = 9
+        mul -= 1
 
-    ans = 0
-    for i in range(1, n + 1):
-        if mn[i] >= i:
-            ans += mn[i] - i + 1
+    ans = ["0"]*a
+    for i in range(mul):
+        ans[i] = "9"
+    ans[mul] = str(rem)
 
-    print(ans)
+    maxx = "".join(ans)
+
+    ans2 = ["0"]*a
+    ind = -1
+    for i in range(mul):
+        ans2[ind] = "9"
+        ind -= 1
+
+    rem2 = rem - 1
+    if abs(ind) == a:
+        ans2[0] = str(rem)
+    else:
+        ans2[0] = "1"
+        ans2[ind] = str(rem2)
+
+
+
+    print("".join(ans2), maxx)
 
                                   
     

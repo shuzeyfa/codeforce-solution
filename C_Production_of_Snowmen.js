@@ -1,0 +1,54 @@
+// Read all input
+const fs = require('fs');
+const data = fs.readFileSync(0, 'utf8').trim().split(/\s+/);
+let idx = 0;
+
+T = data[idx++]
+
+while (T--){
+    let n = data[idx++]
+    let a = [];
+    let b = [];
+    let c = [];
+
+    for(let i=0; i < n; i++){
+        a.push(Number(data[idx++]));
+    }
+
+    for(let i=0; i < n; i++){
+        b.push(Number(data[idx++]));
+    }
+
+    for(let i=0; i < n; i++){
+        c.push(Number(data[idx++]));
+    }
+    
+    var count1 = 0;
+    var count2 = 0;
+
+    for (let i = 0; i < n; i++) {
+        let ok = true;
+        for (let j = 0; j < n; j++) {
+        const ind = (i + j) % n;
+        if (a[ind] >= b[j]) {
+            ok = false;
+            break;
+        }
+        }
+        if (ok) count1++;
+    }
+
+    for (let k = 0; k < n; k++) {
+        let ok = true;
+        for (let j = 0; j < n; j++) {
+        const ind = (k + j) % n;
+        if (c[ind] <= b[j]) {
+            ok = false;
+            break;
+        }
+        }
+        if (ok) count2++;
+    }
+    console.log(count1*count2*n)
+
+}

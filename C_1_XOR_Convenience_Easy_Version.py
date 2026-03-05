@@ -1,4 +1,3 @@
-
 import sys, os
 import math
 from collections import defaultdict, deque, Counter
@@ -19,25 +18,31 @@ t = getInt()
    
           
 def solve():
-    n, m = getIntList()
+    n = getInt()
 
-    mn = [n] * (n + 2)
+    ans = [0]*n
+    
+    if n % 2 == 0:
+        ans[0] = n
+    else:
+        ans[0] = n - 1
 
-    for _ in range(m):
-        u, v = getIntList()
-        if u > v:
-            u, v = v, u
-        mn[u] = min(mn[u], v - 1)
+    cur = 3
 
-    for i in range(n - 1, 0, -1):
-        mn[i] = min(mn[i], mn[i + 1])
+    for i in range(1, n-1, 2):
+        ans[i] = cur
+        cur += 2
 
-    ans = 0
-    for i in range(1, n + 1):
-        if mn[i] >= i:
-            ans += mn[i] - i + 1
 
-    print(ans)
+    ans[-1] = 1
+
+    cur = 2
+
+    for i in range(2, n-1, 2):
+        ans[i] = i
+
+    print(*ans)
+
 
                                   
     

@@ -1,0 +1,39 @@
+
+import sys, math
+
+number = [4, 8, 15, 16, 23, 42 ]
+
+
+print("? 1 2", flush=True)
+val1 = int(input())
+
+print("? 2 3", flush=True)
+val2 = int(input())
+
+for i in number:
+    if val1%i != 0 or val2%i != 0:
+        continue
+    first = val1 // i
+    sec = val2 // i
+    if first in number and sec in number and first != i and sec != i:
+        a2 = i
+        break
+
+ans = []
+ans.append(val1 // a2)
+ans.append(a2)
+ans.append(val2 // a2)
+
+print("? 3 4", flush=True)
+val3 = int(input())
+ans.append(val3 // ans[-1])
+
+print("? 4 5", flush=True)
+val4 = int(input())
+ans.append(val4 // ans[-1])
+
+for i in number:
+    if i not in ans:
+        ans.append(i)
+        break
+print("!", *ans, flush=True)

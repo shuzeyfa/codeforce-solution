@@ -14,34 +14,48 @@ def getStrList(): return list(sys.stdin.readline().strip().split())
 
 
 t = 1
-t = getInt()
+# t = getInt()
 
    
           
 def solve():
     n, m = getIntList()
 
-    mn = [n] * (n + 2)
+    rank = [1]*n
+    parent = {i:i for i in range(n)}
 
-    for _ in range(m):
-        u, v = getIntList()
-        if u > v:
-            u, v = v, u
-        mn[u] = min(mn[u], v - 1)
+    def find(x):
 
-    for i in range(n - 1, 0, -1):
-        mn[i] = min(mn[i], mn[i + 1])
-
-    ans = 0
-    for i in range(1, n + 1):
-        if mn[i] >= i:
-            ans += mn[i] - i + 1
-
-    print(ans)
-
-                                  
+        while x != parent[x]:
+            parent[x] = parent[parent[x]]
+            x = parent[x]   
+        return x
     
+    def union(x, y):
+        rep1, rep2 = find(x), find(y)
 
+        if rep1 != rep2:
+
+            if rank[rep1] >= rank[rep2]:
+                rank[rep1] += rank[rep2]
+                parent[rep2] = rep1
+            else:
+                rank[rep2] += rank[rep1]
+                parent[rep1] = rep2
+
+    for i in range(m):
+        l = getIntList()
+
+        for j in range(2, l[0]+1):
+            union(l[j] - 1, l[j-1] - 1)
+        # print(parent)
+        # print()
+
+    # print(parent)
+    for i in range(n):
+        val = find(i)
+        print(rank[val], end= " ")
+    print()
 
           
             

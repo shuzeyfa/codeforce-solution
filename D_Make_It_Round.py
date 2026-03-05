@@ -19,29 +19,37 @@ t = getInt()
    
           
 def solve():
-    n, m = getIntList()
+    n, k = getIntList()
+    val = n
 
-    mn = [n] * (n + 2)
+    two = five = 0
 
-    for _ in range(m):
-        u, v = getIntList()
-        if u > v:
-            u, v = v, u
-        mn[u] = min(mn[u], v - 1)
-
-    for i in range(n - 1, 0, -1):
-        mn[i] = min(mn[i], mn[i + 1])
-
-    ans = 0
-    for i in range(1, n + 1):
-        if mn[i] >= i:
-            ans += mn[i] - i + 1
-
-    print(ans)
-
-                                  
+    while val > 0 and val%2 == 0:
+        two += 1
+        val //= 2
+    
+    while val > 0 and val%5 == 0:
+        five  += 1
+        val //= 5
     
 
+    
+    
+    for i in range(18, -1, -1):
+
+        rem2 = max(i - two, 0)
+        rem5 = max(i - five, 0)
+
+        need = (2**rem2) * (5**rem5)
+
+        if need <= k:
+            ans = k - k%need
+            print(int(ans*n))
+            return
+        
+    print(int(n*k))
+
+        
 
           
             

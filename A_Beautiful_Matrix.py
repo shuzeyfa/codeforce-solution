@@ -14,31 +14,25 @@ def getStrList(): return list(sys.stdin.readline().strip().split())
 
 
 t = 1
-t = getInt()
+# t = getInt()
 
    
           
 def solve():
-    n, m = getIntList()
+    l = [] 
+    for i in range(5):
+        l.append(getIntList())
 
-    mn = [n] * (n + 2)
+    row = col= 0
 
-    for _ in range(m):
-        u, v = getIntList()
-        if u > v:
-            u, v = v, u
-        mn[u] = min(mn[u], v - 1)
+    for i in range(5):
+        for j in range(5):
+            if l[i][j] == 1:
+                row = i
+                col = j
+                break
 
-    for i in range(n - 1, 0, -1):
-        mn[i] = min(mn[i], mn[i + 1])
-
-    ans = 0
-    for i in range(1, n + 1):
-        if mn[i] >= i:
-            ans += mn[i] - i + 1
-
-    print(ans)
-
+    print(abs(2-row) + abs(2-col))   
                                   
     
 

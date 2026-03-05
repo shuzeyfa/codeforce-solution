@@ -19,26 +19,17 @@ t = getInt()
    
           
 def solve():
-    n, m = getIntList()
+    n = getInt()
+    s = getStr()
 
-    mn = [n] * (n + 2)
+    if "2026" in s:
+        print(0)
+        return
 
-    for _ in range(m):
-        u, v = getIntList()
-        if u > v:
-            u, v = v, u
-        mn[u] = min(mn[u], v - 1)
-
-    for i in range(n - 1, 0, -1):
-        mn[i] = min(mn[i], mn[i + 1])
-
-    ans = 0
-    for i in range(1, n + 1):
-        if mn[i] >= i:
-            ans += mn[i] - i + 1
-
-    print(ans)
-
+    if "2025" in s:
+        print(1)
+    else:
+        print(0)    
                                   
     
 

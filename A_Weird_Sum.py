@@ -14,35 +14,50 @@ def getStrList(): return list(sys.stdin.readline().strip().split())
 
 
 t = 1
-t = getInt()
+# t = getInt()
 
    
           
 def solve():
     n, m = getIntList()
+    d = defaultdict(list)
 
-    mn = [n] * (n + 2)
-
-    for _ in range(m):
-        u, v = getIntList()
-        if u > v:
-            u, v = v, u
-        mn[u] = min(mn[u], v - 1)
-
-    for i in range(n - 1, 0, -1):
-        mn[i] = min(mn[i], mn[i + 1])
+    for i in range(n):
+        temp = getIntList()
+        for j in range(m):
+            d[temp[j]].append((i+1, j+1))
 
     ans = 0
-    for i in range(1, n + 1):
-        if mn[i] >= i:
-            ans += mn[i] - i + 1
+    
+    for i in d:
+        l = d[i]
+        row = sorted(r for r, c in l)
+        col = sorted(c for r, c in l)
+
+        row.sort()
+        col.sort()
+
+        if len(row) > 1:
+            
+
+            prefix = 0
+
+            for j in range(len(row)):
+                ans += j*row[j] - prefix
+                prefix += row[j]
+
+        if len(col) > 1:
+
+            prefix = 0
+
+            for j in range(len(col)):
+                ans += j*col[j] - prefix
+                prefix += col[j]
+                       
+
+
 
     print(ans)
-
-                                  
-    
-
-
           
             
                

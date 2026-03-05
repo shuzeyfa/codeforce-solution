@@ -19,26 +19,32 @@ t = getInt()
    
           
 def solve():
-    n, m = getIntList()
+    n = getInt()
+    l = getIntList()
 
-    mn = [n] * (n + 2)
+    val = n
 
-    for _ in range(m):
-        u, v = getIntList()
-        if u > v:
-            u, v = v, u
-        mn[u] = min(mn[u], v - 1)
+    ind = -1
 
-    for i in range(n - 1, 0, -1):
-        mn[i] = min(mn[i], mn[i + 1])
+    for i in range(n):
+        if l[i] != val:
+            ind = i
+            break
+        val -= 1
+    
+    if ind == -1:
+        print(*l)
+        return
+    
+    ans = []
+    for i in range(ind):
+        ans.append(l[i])
+    
+    ind2 = l.index(val)
 
-    ans = 0
-    for i in range(1, n + 1):
-        if mn[i] >= i:
-            ans += mn[i] - i + 1
-
-    print(ans)
-
+    ans += l[ind:ind2+1][::-1] 
+    ans += l[ind2+1:]
+    print(*ans)
                                   
     
 

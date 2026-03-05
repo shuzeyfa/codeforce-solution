@@ -19,31 +19,30 @@ t = getInt()
    
           
 def solve():
-    n, m = getIntList()
+    n = getInt()
+    l = getIntList()
 
-    mn = [n] * (n + 2)
+    val = l[:]
+    val.sort()
 
-    for _ in range(m):
-        u, v = getIntList()
-        if u > v:
-            u, v = v, u
-        mn[u] = min(mn[u], v - 1)
+    color = [-1]*n
 
-    for i in range(n - 1, 0, -1):
-        mn[i] = min(mn[i], mn[i + 1])
-
-    ans = 0
-    for i in range(1, n + 1):
-        if mn[i] >= i:
-            ans += mn[i] - i + 1
-
-    print(ans)
-
+    color[l[0]-1] = 1   
+    cur = 0
                                   
     
-
-
-          
+    for i in range(1, n):
+        if l[i]-1 > 0:
+            if color[l[i]-2] == cur:
+                print("NO")
+                return
+        if l[i]+1 <= n:
+            if color[l[i]] == cur:
+                print("NO")
+                return
+        color[l[i]-1] = cur
+        cur = 1 - cur
+    print("YES")
             
                
      

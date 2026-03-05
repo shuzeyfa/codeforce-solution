@@ -14,36 +14,52 @@ def getStrList(): return list(sys.stdin.readline().strip().split())
 
 
 t = 1
-t = getInt()
+# t = getInt()
 
    
           
 def solve():
-    n, m = getIntList()
+    n = getInt()
+    
+    d = defaultdict(list)
+    color = [0]*n
 
-    mn = [n] * (n + 2)
+    root = -1
 
-    for _ in range(m):
-        u, v = getIntList()
-        if u > v:
-            u, v = v, u
-        mn[u] = min(mn[u], v - 1)
+    for i in range(n):
+        par, col = getIntList()
+        if par == -1:
+            root = i
+            continue
+        d[par-1].append(i)
+        color[i] = col
+    
+    q = deque()
 
-    for i in range(n - 1, 0, -1):
-        mn[i] = min(mn[i], mn[i + 1])
-
-    ans = 0
-    for i in range(1, n + 1):
-        if mn[i] >= i:
-            ans += mn[i] - i + 1
-
-    print(ans)
-
-                                  
+    for i in d[root]:
+        q.append(i)
+    
+    ans = []
     
 
+    while q:
 
-          
+        cur = q.popleft()
+
+        t = True 
+
+        for i in d[cur]:
+            if color[cur] == 0 or color[i] == 0:
+                t = False
+            q.append(i)
+        if t and color[cur] != 0:
+            ans.append(cur+1)
+    ans.sort()
+    if not ans:
+        print(-1)
+    else:
+        print(*ans)
+
             
                
      

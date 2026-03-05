@@ -16,30 +16,30 @@ def getStrList(): return list(sys.stdin.readline().strip().split())
 t = 1
 t = getInt()
 
-   
           
 def solve():
-    n, m = getIntList()
+    n, x = getIntList()
 
-    mn = [n] * (n + 2)
+    free = 0
+    maxx = 0
+    for i in range(n):
+        a, b, c = getIntList()
 
-    for _ in range(m):
-        u, v = getIntList()
-        if u > v:
-            u, v = v, u
-        mn[u] = min(mn[u], v - 1)
+        free += (b-1)*a
+        get = b*a - c
+        maxx = max(maxx, get)
 
-    for i in range(n - 1, 0, -1):
-        mn[i] = min(mn[i], mn[i + 1])
+    if x <= free:
+        print(0)
+        return
 
-    ans = 0
-    for i in range(1, n + 1):
-        if mn[i] >= i:
-            ans += mn[i] - i + 1
+    if maxx <= 0:
+        print(-1)
+        return
 
-    print(ans)
-
-                                  
+    rem = x - free
+    back = (rem + maxx - 1) // maxx
+    print(back)    
     
 
 

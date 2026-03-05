@@ -3,6 +3,7 @@ import sys, os
 import math
 from collections import defaultdict, deque, Counter
 from functools import lru_cache
+from heapq import heapify, heappop, heappush
 from bisect import bisect_right, bisect_left
 RANDOM = int.from_bytes(os.urandom(8), "big")
 def getInt(): return int(sys.stdin.readline().strip())
@@ -19,25 +20,42 @@ t = getInt()
    
           
 def solve():
-    n, m = getIntList()
+    n, k = getIntList()
+    l = getIntList()
 
-    mn = [n] * (n + 2)
+    heap = []
 
-    for _ in range(m):
-        u, v = getIntList()
-        if u > v:
-            u, v = v, u
-        mn[u] = min(mn[u], v - 1)
+    for i in range(n - k +1):
+        minn = [False]*k
 
-    for i in range(n - 1, 0, -1):
-        mn[i] = min(mn[i], mn[i + 1])
+        for j in range(k):
+            if l[j+i] < k:
+                minn[l[j+i]] = True
+        check = False
+        for ind in range(k):
+            if not minn[ind]:
+                check = True
+                heap.append(ind)
+                break
+        if not check:
+            heap.append(k)
+    
+    rem = n - k + 1
+    # print(heap)
+    res = 0
+    if 0 in l:
+        res = 1
 
-    ans = 0
-    for i in range(1, n + 1):
-        if mn[i] >= i:
-            ans += mn[i] - i + 1
-
-    print(ans)
+    ans = []
+    for i in heap:
+        heappush(ans, -i)
+    
+    for i in range(rem):
+        val = -heappop(ans)
+        val -= 1
+        heappush(ans, -val)
+    val = -heappop(ans)
+    print( max(res, val) )
 
                                   
     

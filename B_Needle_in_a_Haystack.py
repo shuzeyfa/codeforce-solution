@@ -19,26 +19,51 @@ t = getInt()
    
           
 def solve():
-    n, m = getIntList()
+    s = getStr()
+    t = getStr()
 
-    mn = [n] * (n + 2)
+    d2 = Counter(s)
 
-    for _ in range(m):
-        u, v = getIntList()
-        if u > v:
-            u, v = v, u
-        mn[u] = min(mn[u], v - 1)
+    d = Counter(t)
 
-    for i in range(n - 1, 0, -1):
-        mn[i] = min(mn[i], mn[i + 1])
+    for i in d2:
+        if d[i] < d2[i]:
+            print("Impossible")
+            return
 
-    ans = 0
-    for i in range(1, n + 1):
-        if mn[i] >= i:
-            ans += mn[i] - i + 1
+    value = []
+    for i in d:
+        val = d[i]
+        val -= d2[i]
 
-    print(ans)
+        for j in range(val):
+            value.append(i)
 
+    ans = []
+
+    value.sort()
+
+    i = 0
+    j = 0
+    print(value)
+
+    while i < len(value) and j < len(s):
+        if s[j] < value[i]:
+            ans.append(s[j])
+            j += 1
+        else:
+            ans.append(value[i])
+            i += 1
+    
+    while j < len(s):
+        ans.append(s[j])
+        j += 1
+    
+    while i < len(value):
+        ans.append(value[i])
+        i += 1
+    
+    print("".join(ans))
                                   
     
 

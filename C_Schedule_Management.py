@@ -20,25 +20,54 @@ t = getInt()
           
 def solve():
     n, m = getIntList()
+    l = getIntList()
 
-    mn = [n] * (n + 2)
+    d = [0]*(n+1)
 
-    for _ in range(m):
-        u, v = getIntList()
-        if u > v:
-            u, v = v, u
-        mn[u] = min(mn[u], v - 1)
+    for i in range(m):
+        d[l[i]] += 1
+    
+    count = 0
+    for i in range(1, n+1):
+        if d[i] == 0:
+            count += 1
 
-    for i in range(n - 1, 0, -1):
-        mn[i] = min(mn[i], mn[i + 1])
+    
+    left, right = 1, m
 
-    ans = 0
-    for i in range(1, n + 1):
-        if mn[i] >= i:
-            ans += mn[i] - i + 1
+    def check(cur):
+        
+        need = 0
+        free = count
 
-    print(ans)
+        free *= (cur // 2)
 
+        for i in range(1, n+1):
+            if d[i] > 0:
+                if cur - d[i] > 0:
+                    free += ((cur - d[i]) // 2)
+                else:
+                    need += d[i] - cur
+            
+            
+        return free >= need
+        
+        
+        
+
+
+
+        
+
+    ans = right
+    while left <= right:
+        mid = (left + right) // 2
+        if check(mid):
+            ans = mid
+            right = mid - 1
+        else:
+            left = mid + 1
+    print(ans)     
                                   
     
 

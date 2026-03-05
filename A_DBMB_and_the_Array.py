@@ -19,26 +19,22 @@ t = getInt()
    
           
 def solve():
-    n, m = getIntList()
+    n, s, x = getIntList()
 
-    mn = [n] * (n + 2)
+    l = getIntList()
 
-    for _ in range(m):
-        u, v = getIntList()
-        if u > v:
-            u, v = v, u
-        mn[u] = min(mn[u], v - 1)
+    summ = sum(l)
 
-    for i in range(n - 1, 0, -1):
-        mn[i] = min(mn[i], mn[i + 1])
+    if summ > s:
+        print("NO")
+        return
 
-    ans = 0
-    for i in range(1, n + 1):
-        if mn[i] >= i:
-            ans += mn[i] - i + 1
+    rem = summ - s
 
-    print(ans)
-
+    if rem%x == 0:
+        print("YES")
+    else:
+        print("NO")  
                                   
     
 
