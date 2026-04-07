@@ -1,0 +1,64 @@
+import sys, os
+import math
+from collections import defaultdict, deque, Counter
+from functools import lru_cache
+from bisect import bisect_right, bisect_left
+RANDOM = int.from_bytes(os.urandom(8), "big")
+def getInt(): return int(sys.stdin.readline().strip())
+def getStr(): return sys.stdin.readline().strip()
+def getIntSeq(): return map(int, sys.stdin.readline().strip().split())
+def getStrSeq(): return sys.stdin.readline().strip().split()
+def getIntList(): return list(map(int, sys.stdin.readline().strip().split()))
+def getStrList(): return list(sys.stdin.readline().strip().split())
+
+
+t = 1
+t = getInt()
+
+
+          
+def solve():
+    n, k = getIntList()
+    a = getIntList()
+    b = getIntList()
+
+    for i in range(n - k):
+        if b[i] != -1 and b[i] != a[i]:
+            print("NO")
+            return
+        
+    for i in range(k, n):
+        if b[i] != -1 and b[i] != a[i]:
+            print("NO")
+            return
+
+    midleft = n - k
+    midright = k
+    require = set(a[midleft:midright])
+    seen = set()
+    for i in range(midleft, midright):
+        if b[i] != -1:
+            val = b[i]
+            if val in seen or val not in require:
+                print("NO")
+                return
+            seen.add(val)
+
+    print("YES")
+                                  
+    
+
+
+          
+            
+               
+     
+                             
+    
+        
+                     
+    
+                      
+    
+for _ in range(t):
+    solve()
