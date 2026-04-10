@@ -1,0 +1,74 @@
+
+import sys, os
+import math
+from collections import defaultdict, deque, Counter
+from functools import lru_cache
+from bisect import bisect_right, bisect_left
+RANDOM = int.from_bytes(os.urandom(8), "big")
+def getInt(): return int(sys.stdin.readline().strip())
+def getStr(): return sys.stdin.readline().strip()
+def getIntSeq(): return map(int, sys.stdin.readline().strip().split())
+def getStrSeq(): return sys.stdin.readline().strip().split()
+def getIntList(): return list(map(int, sys.stdin.readline().strip().split()))
+def getStrList(): return list(sys.stdin.readline().strip().split())
+
+
+t = 1
+t = getInt()
+
+   
+          
+def solve():
+    n = getInt()
+    l = getIntList()
+    s = getStr()
+
+    prefixOfOne = prefixOfZero = 0
+    prefix = [l[0]]
+
+    for i in range(1, n):
+        prefix.append(prefix[-1] ^ l[i])
+
+    for i in range(n):
+        if s[i] == "1":
+            prefixOfOne ^= l[i]
+        else:
+            prefixOfZero ^= l[i]
+
+    q = getInt()
+    for __ in range(q):
+        query = getIntList()
+        if query[0] == 2:
+            if query[1] == 0:
+                print(prefixOfZero, end=" ")
+            else:
+                print(prefixOfOne, end=" ")
+        else:
+            right, left = query[2], query[1]
+
+            rightVal = prefix[right-1]
+            leftVal = 0
+
+            if left - 2 >= 0:
+                leftVal = prefix[left-2]
+            
+            prefixOfOne ^= rightVal ^ leftVal
+            prefixOfZero ^= rightVal ^ leftVal
+
+    print()                            
+    
+
+
+          
+            
+               
+     
+                             
+    
+        
+                     
+    
+                      
+    
+for _ in range(t):
+    solve()

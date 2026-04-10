@@ -1,0 +1,108 @@
+
+import sys, os
+import math
+from collections import defaultdict, deque, Counter
+from functools import lru_cache
+from bisect import bisect_right, bisect_left
+RANDOM = int.from_bytes(os.urandom(8), "big")
+def getInt(): return int(sys.stdin.readline().strip())
+def getStr(): return sys.stdin.readline().strip()
+def getIntSeq(): return map(int, sys.stdin.readline().strip().split())
+def getStrSeq(): return sys.stdin.readline().strip().split()
+def getIntList(): return list(map(int, sys.stdin.readline().strip().split()))
+def getStrList(): return list(sys.stdin.readline().strip().split())
+
+
+t = 1
+t = getInt()
+
+   
+          
+def solve():
+    n, k = getIntList()
+
+    l = []  
+
+    for i in range(k):
+        l.append(getStr())
+
+    bitMask = [0] * n
+
+    for i in range(n):
+        for j in range(k):
+            bitMask[i] |= (1 << (ord(l[j][i]) - ord("a"))) 
+
+
+    # step2 to find divisor
+    divisors = []
+
+    for i in range(1, int(n**0.5) + 1):
+
+        if n%i == 0:
+            divisors.append(i)
+            if i != n // i:
+                divisors.append(n // i)
+    divisors.sort()
+
+
+
+    # step3 to find minimum one
+    minn = -1
+
+    for d in divisors:
+        ok = True
+        
+        for r in range(d):
+            inter = (1 << 26) - 1  
+            
+            j = r
+            while j < n:
+                inter &= bitMask[j]
+                j += d
+            
+            if inter == 0:
+                ok = False
+                break
+        
+        if ok:
+            minn = d
+            break
+    
+    # STEP4 to build the answer
+    block = [''] * minn
+    
+    for r in range(minn):
+        inter = (1 << 26) - 1
+        
+        j = r
+        while j < n:
+            inter &= bitMask[j]
+            j += minn
+        
+        # pick smallest letter
+        for c in range(26):
+            if inter & (1 << c):
+                block[r] = chr(ord('a') + c)
+                break
+    
+    ans = ''.join(block) * (n // minn)
+    
+    print(ans)
+    
+
+    
+
+
+          
+            
+               
+     
+                             
+    
+        
+                     
+    
+                      
+    
+for _ in range(t):
+    solve()
