@@ -1,0 +1,81 @@
+
+import sys, os
+import math
+from collections import defaultdict, deque, Counter
+from functools import lru_cache
+from bisect import bisect_right, bisect_left
+RANDOM = int.from_bytes(os.urandom(8), "big")
+def getInt(): return int(sys.stdin.readline().strip())
+def getStr(): return sys.stdin.readline().strip()
+def getIntSeq(): return map(int, sys.stdin.readline().strip().split())
+def getStrSeq(): return sys.stdin.readline().strip().split()
+def getIntList(): return list(map(int, sys.stdin.readline().strip().split()))
+def getStrList(): return list(sys.stdin.readline().strip().split())
+
+
+t = 1
+t = getInt()
+
+   
+          
+def solve():
+    n, h, k = getIntList()
+    l = getIntList()
+
+    total = sum(l)
+
+    cycles = max(0, (h - 1) // total)
+    time_full = cycles * (n + k)
+    remain = h - cycles * total
+
+    pref = [0] * (n + 1)
+    for i in range(n):
+        pref[i + 1] = pref[i] + l[i]
+
+    suffix_max = [0] * n
+    suffix_max[-1] = l[-1]
+    for i in range(n - 2, -1, -1):
+        suffix_max[i] = max(l[i], suffix_max[i + 1])
+    
+    minn = [float('inf'), l[0]]
+
+    for i in range(1, n):
+        minn.append(min(minn[-1], l[i]))
+
+    ans = float("inf")
+
+    for m in range(1, n + 1):
+
+        cur = pref[m]
+        if cur >= remain:
+            ans = min(ans, time_full + m)
+            continue
+
+        if m < n:
+            best_future = suffix_max[m]
+            worst_prefix = minn[m]
+
+            newVal = cur - worst_prefix + best_future
+
+            if newVal >= remain:
+                ans = min(ans, time_full + m)
+
+    print(ans)
+
+                                  
+    
+
+
+          
+            
+               
+     
+                             
+    
+        
+                     
+    
+                      
+    
+for _ in range(t):
+    solve()

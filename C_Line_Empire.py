@@ -1,0 +1,50 @@
+import sys, os
+import math
+from collections import defaultdict, deque, Counter
+from functools import lru_cache
+from bisect import bisect_right, bisect_left
+RANDOM = int.from_bytes(os.urandom(8), "big")
+def getInt(): return int(sys.stdin.readline().strip())
+def getStr(): return sys.stdin.readline().strip()
+def getIntSeq(): return map(int, sys.stdin.readline().strip().split())
+def getStrSeq(): return sys.stdin.readline().strip().split()
+def getIntList(): return list(map(int, sys.stdin.readline().strip().split()))
+def getStrList(): return list(sys.stdin.readline().strip().split())
+t = 1
+t = getInt()
+  
+         
+def solve():
+    n, a, b = getIntList()
+    l = getIntList()
+
+    summ = sum(l)
+    prefix = [l[0]]
+
+    for i in range(1, n):
+        prefix.append(prefix[-1] + l[i])
+    
+    minn = summ * b
+
+    for i in range(n):
+        first = l[i] * (a + b)
+        sec = (summ - prefix[i]) * b - b * (l[i] * (n - i - 1))
+
+        minn = min(minn, first + sec)
+    
+    print(minn)
+                                 
+   
+         
+           
+              
+    
+                            
+   
+       
+                    
+   
+                     
+   
+for _ in range(t):
+    solve()
