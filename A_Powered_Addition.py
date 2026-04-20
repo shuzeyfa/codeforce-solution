@@ -22,38 +22,18 @@ def solve():
     n = getInt()
     l = getIntList()
 
-    @lru_cache(None)
-    def dp(ind):
+    maxx = l[0]
+    diff = 0
 
-        if ind >= n:
-            return 0
-        
-        if l[ind] == 1:
-            ans = 1
+    for i in range(1, n):
+
+        if l[i] < maxx:
+            diff = max(diff, maxx - l[i]) 
         else:
-            ans = 0
-
-        first = dp(ind + 2)
-        sec = dp(ind + 3)
-
-        third = fourth = float('inf')
-
-        ans2 = 0
-
-        if ind+1 < n:
-            if l[ind+1] == 1:
-                ans2 = ans + 1
-            else:
-                ans2 = ans 
-            
-            third = dp(ind + 3)
-            fourth = dp(ind + 4)
-
-        return min(first+ans, sec+ans, third+ans2, fourth+ans2)
-
+            maxx = l[i]  
                                   
-    
-    print(dp(0))
+    print(diff.bit_length())
+
 
           
             

@@ -14,46 +14,50 @@ def getStrList(): return list(sys.stdin.readline().strip().split())
 
 
 t = 1
-t = getInt()
+# t = getInt()
 
    
           
 def solve():
     n = getInt()
-    l = getIntList()
 
-    @lru_cache(None)
-    def dp(ind):
+    edges = []
+    deg = [0] * (n + 1)
 
-        if ind >= n:
-            return 0
-        
-        if l[ind] == 1:
-            ans = 1
-        else:
-            ans = 0
+    for _ in range(n - 1):
+        u, v = map(int, input().split())
+        edges.append((u, v))
+        deg[u] += 1
+        deg[v] += 1
 
-        first = dp(ind + 2)
-        sec = dp(ind + 3)
+    special = -1
+    for i in range(1, n + 1):
+        if deg[i] >= 3:
+            special = i
+            break
 
-        third = fourth = float('inf')
+    ans = [-1] * (n - 1)
 
-        ans2 = 0
+    if special != -1:
+        cur = 0
+        for i in range(n - 1):
+            u, v = edges[i]
+            if u == special or v == special:
+                if cur < 3:
+                    ans[i] = cur
+                    cur += 1
 
-        if ind+1 < n:
-            if l[ind+1] == 1:
-                ans2 = ans + 1
-            else:
-                ans2 = ans 
-            
-            third = dp(ind + 3)
-            fourth = dp(ind + 4)
+    cur = 0 if special == -1 else 3
+    for i in range(n - 1):
+        if ans[i] == -1:
+            ans[i] = cur
+            cur += 1
 
-        return min(first+ans, sec+ans, third+ans2, fourth+ans2)
-
+    for i in ans:
+        print(i)
                                   
     
-    print(dp(0))
+
 
           
             

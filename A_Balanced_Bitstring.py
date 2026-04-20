@@ -19,41 +19,32 @@ t = getInt()
    
           
 def solve():
-    n = getInt()
-    l = getIntList()
+    n, k = getIntList()
+    s = getStr()
 
-    @lru_cache(None)
-    def dp(ind):
+    l = [-1]*k
 
-        if ind >= n:
-            return 0
-        
-        if l[ind] == 1:
-            ans = 1
+
+    for i in range(n):
+        if s[i] == '?':
+            continue
+
+        if l[i%k] != -1:
+            if l[i%k] != int(s[i]):
+                print("NO")
+                return
         else:
-            ans = 0
+            l[i%k] = int(s[i])
 
-        first = dp(ind + 2)
-        sec = dp(ind + 3)
+    one, zero = l.count(1), l.count(0)
 
-        third = fourth = float('inf')
+    if one > k//2 or zero > k//2:
+        print("NO")
+        return
 
-        ans2 = 0
-
-        if ind+1 < n:
-            if l[ind+1] == 1:
-                ans2 = ans + 1
-            else:
-                ans2 = ans 
-            
-            third = dp(ind + 3)
-            fourth = dp(ind + 4)
-
-        return min(first+ans, sec+ans, third+ans2, fourth+ans2)
-
-                                  
+    print("YES")               
     
-    print(dp(0))
+
 
           
             
