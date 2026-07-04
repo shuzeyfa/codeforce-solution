@@ -19,61 +19,27 @@ t = getInt()
    
           
 def solve():
-    n, m = getIntList()
-    l = getIntList()
-<<<<<<< HEAD
-
-    i = 0
-
-    while i < n:
-
-        count = 0
-
-        val = l[i]
-        while i < n and val == l[i]:
-            count += 1
-            i += 1
-        if count >= m:
-            print("NO")
-            return
-    print("YES")
-
-
-
-    
-
-                                  
-    
-
-
-          
-=======
-    
-    
-    count = 1
-    
-    for i in range(1 , n):
-        if l[i] == l[i-1]:
-            count += 1
-        else:
-            count = 1
-        
-        if count == m:
-            print("NO")
-            return
-    
-    print("YES")
-        
-   
-    
-    
-    
->>>>>>> de1e51b (additional problem)
-            
-               
+    a, b, x = getIntList()
      
-                             
+    ans = max(a, b) - min(a, b)
+    cur = 0
     
+    maxx, minn = max(a, b), min(a, b)
+    
+    while maxx != minn:
+        
+        cur += 1
+        maxx //= x
+        
+        if maxx < minn:
+            val = maxx
+            maxx = minn
+            minn = val
+        
+        cost = cur + (maxx - minn)
+        ans = min(cost, ans)
+    print(ans)
+        
         
                      
     

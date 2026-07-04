@@ -19,56 +19,29 @@ t = getInt()
    
           
 def solve():
-    n, m = getIntList()
+    n = getInt()
+
     l = getIntList()
-<<<<<<< HEAD
-
-    i = 0
-
-    while i < n:
-
-        count = 0
-
-        val = l[i]
-        while i < n and val == l[i]:
-            count += 1
-            i += 1
-        if count >= m:
-            print("NO")
-            return
-    print("YES")
-
-
-
-    
-
-                                  
-    
-
-
-          
-=======
-    
-    
-    count = 1
-    
-    for i in range(1 , n):
-        if l[i] == l[i-1]:
-            count += 1
-        else:
-            count = 1
-        
-        if count == m:
-            print("NO")
-            return
-    
-    print("YES")
-        
    
     
     
+    mod =  676767677
     
->>>>>>> de1e51b (additional problem)
+    one = 0
+    
+    summ = 0
+    
+    for i in l:
+        
+        if i == 1:
+            continue
+        else:
+            summ += i
+    
+    if l[-1] == 1:
+        summ += 1
+            
+    print((summ+one) % mod)  
             
                
      

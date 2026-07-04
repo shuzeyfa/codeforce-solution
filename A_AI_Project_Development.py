@@ -19,57 +19,20 @@ t = getInt()
    
           
 def solve():
-    n, m = getIntList()
-    l = getIntList()
-<<<<<<< HEAD
-
-    i = 0
-
-    while i < n:
-
-        count = 0
-
-        val = l[i]
-        while i < n and val == l[i]:
-            count += 1
-            i += 1
-        if count >= m:
-            print("NO")
-            return
-    print("YES")
-
-
-
+    n, x, y, z = getIntList()
+    n2 = n
     
-
-                                  
-    
-
-
-          
-=======
-    
-    
-    count = 1
-    
-    for i in range(1 , n):
-        if l[i] == l[i-1]:
-            count += 1
-        else:
-            count = 1
+    val = x * z
+    if val >= n:
+        ans = math.ceil(n / x)
+    else:
+        ans = z
+        n -= (z * x)
         
-        if count == m:
-            print("NO")
-            return
-    
-    print("YES")
+        ans += math.ceil(n / (x + y*10))
         
-   
-    
-    
-    
->>>>>>> de1e51b (additional problem)
-            
+    ans2 = math.ceil(n2 / (x+y))
+    print(min(ans, ans2))       
                
      
                              

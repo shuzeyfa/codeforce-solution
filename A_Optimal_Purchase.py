@@ -19,56 +19,20 @@ t = getInt()
    
           
 def solve():
-    n, m = getIntList()
-    l = getIntList()
-<<<<<<< HEAD
-
-    i = 0
-
-    while i < n:
-
-        count = 0
-
-        val = l[i]
-        while i < n and val == l[i]:
-            count += 1
-            i += 1
-        if count >= m:
-            print("NO")
-            return
-    print("YES")
-
-
-
+    n, a, b = getIntList()
     
-
-                                  
+    val = b / 3
     
-
-
-          
-=======
-    
-    
-    count = 1
-    
-    for i in range(1 , n):
-        if l[i] == l[i-1]:
-            count += 1
+    if val < a:
+        ans = (n // 3) * b
+        remStu = n%3
+        if a*remStu < b:
+            ans += a*remStu
         else:
-            count = 1
-        
-        if count == m:
-            print("NO")
-            return
-    
-    print("YES")
-        
-   
-    
-    
-    
->>>>>>> de1e51b (additional problem)
+            ans += b
+        print(ans)
+    else:
+        print(n*a) 
             
                
      

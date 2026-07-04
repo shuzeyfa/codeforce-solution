@@ -19,56 +19,43 @@ t = getInt()
    
           
 def solve():
-    n, m = getIntList()
+    n = getInt()
     l = getIntList()
-<<<<<<< HEAD
-
-    i = 0
-
-    while i < n:
-
-        count = 0
-
-        val = l[i]
-        while i < n and val == l[i]:
-            count += 1
-            i += 1
-        if count >= m:
-            print("NO")
-            return
-    print("YES")
-
-
-
     
-
-                                  
+    x = y = -1
+    first = False
     
-
-
-          
-=======
+    for i in range(2*n):
+        if l[i] == 0:
+            if not first:
+                x = i
+                first = True
+            else:
+                y = i
+                break
     
-    
-    count = 1
-    
-    for i in range(1 , n):
-        if l[i] == l[i-1]:
-            count += 1
-        else:
-            count = 1
+    def expand(left, right):
         
-        if count == m:
-            print("NO")
-            return
-    
-    print("YES")
+        d = defaultdict(int)
+        mex = 0
         
-   
+        while left >= 0 and right < 2*n and l[left] == l[right]:
+            
+            d[l[left]] += 1
+            
+            while d[mex] > 0:
+                mex += 1
+            
+            left -= 1
+            right += 1
+        return mex
+            
     
     
     
->>>>>>> de1e51b (additional problem)
+    print(max(  expand(x, x)    , expand(y, y)  , expand(((x + y) // 2), ((x + y + 1) // 2))  ))
+    
+    
             
                
      
@@ -81,3 +68,4 @@ def solve():
     
 for _ in range(t):
     solve()
+

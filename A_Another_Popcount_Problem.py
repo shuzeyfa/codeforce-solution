@@ -19,57 +19,27 @@ t = getInt()
    
           
 def solve():
-    n, m = getIntList()
-    l = getIntList()
-<<<<<<< HEAD
-
-    i = 0
-
-    while i < n:
-
-        count = 0
-
-        val = l[i]
-        while i < n and val == l[i]:
-            count += 1
-            i += 1
-        if count >= m:
-            print("NO")
-            return
-    print("YES")
-
-
-
+    n, k = getIntList()
     
-
-                                  
+    ans = 0
     
-
-
-          
-=======
+    cur = 0
     
-    
-    count = 1
-    
-    for i in range(1 , n):
-        if l[i] == l[i-1]:
-            count += 1
+    while True:
+        
+        summ = k * (2 ** cur)
+        cur += 1
+        
+        if summ <= n:
+            ans += k
+            n -= summ
         else:
-            count = 1
-        
-        if count == m:
-            print("NO")
-            return
+            val = 2 ** (cur - 1)
+            ans += n // val
+            break
     
-    print("YES")
-        
-   
-    
-    
-    
->>>>>>> de1e51b (additional problem)
-            
+    print(ans)
+              
                
      
                              

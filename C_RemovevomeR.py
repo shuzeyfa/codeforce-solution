@@ -19,58 +19,27 @@ t = getInt()
    
           
 def solve():
-    n, m = getIntList()
-    l = getIntList()
-<<<<<<< HEAD
-
+    n = getInt()
+    
+    s = getStr()
+    
+    count = 0
+    
     i = 0
-
     while i < n:
-
-        count = 0
-
-        val = l[i]
-        while i < n and val == l[i]:
-            count += 1
+        
+        char = s[i]
+        while i < n and char == s[i]:
             i += 1
-        if count >= m:
-            print("NO")
-            return
-    print("YES")
-
-
-
-    
-
-                                  
-    
-
-
-          
-=======
-    
-    
-    count = 1
-    
-    for i in range(1 , n):
-        if l[i] == l[i-1]:
-            count += 1
+        count += 1
+        
+    if s[0] == s[-1]:
+        print(1)
+    else:
+        if count < 3:
+            print(2)
         else:
-            count = 1
-        
-        if count == m:
-            print("NO")
-            return
-    
-    print("YES")
-        
-   
-    
-    
-    
->>>>>>> de1e51b (additional problem)
-            
-               
+            print(1)
      
                              
     

@@ -19,56 +19,34 @@ t = getInt()
    
           
 def solve():
-    n, m = getIntList()
+    n = getInt()
     l = getIntList()
-<<<<<<< HEAD
-
-    i = 0
-
-    while i < n:
-
-        count = 0
-
-        val = l[i]
-        while i < n and val == l[i]:
-            count += 1
-            i += 1
-        if count >= m:
-            print("NO")
-            return
-    print("YES")
-
-
-
     
-
-                                  
+    divisble = []
+    two = []
+    non = []
+    three = []
     
-
-
-          
-=======
-    
-    
-    count = 1
-    
-    for i in range(1 , n):
-        if l[i] == l[i-1]:
-            count += 1
+    for i in l:
+        if i%6 != 0:
+            if i%2 == 0:
+                two.append(i)
+            else:
+                if i%3 == 0:
+                    three.append(i)
+                else:
+                    non.append(i)
+                
         else:
-            count = 1
-        
-        if count == m:
-            print("NO")
-            return
+            divisble.append(i)
+            
+    ans = divisble + three + non + two
     
-    print("YES")
-        
-   
+    print(*ans)
     
     
     
->>>>>>> de1e51b (additional problem)
+    
             
                
      
