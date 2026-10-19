@@ -168,7 +168,7 @@ void lists_as_vectors() {
 
     // Insert at position
     nums.insert(nums.begin() + 1, 99);  // insert 99 at index 1
-[16/10/2026 22:31] H.s: // Remove by value (find first then erase)
+    // Remove by value (find first then erase)
     auto it = find(nums.begin(), nums.end(), 12);
     if (it != nums.end()) nums.erase(it);
 
