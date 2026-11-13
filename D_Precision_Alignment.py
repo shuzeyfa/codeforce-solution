@@ -21,70 +21,53 @@ def solve():
     n, k = getIntSeq()
 
     l = []
+    
+    left = float('inf')
+    
     for _ in range(n):
-        l.append(getIntList())
-
-    # [sum, can_increase]
-    d = []
-
-    for a, b, c in l:
-        val = a + b + c
-
-        if a == b == c:
-            d.append([val, 0])
+        temp = getIntList()
+        left = min(left, sum(temp))
+        if temp[0] > temp[1] or temp[1] > temp[2]:
+            l.append((sum(temp), 0))
+        elif temp[0] == temp[1] == temp[2]:
+            l.append((sum(temp), -1))
         else:
-            d.append([val, 1])
+            l.append((sum(temp), min(temp[1] - temp[0] + 1, temp[2] - temp[1] + 1)))
+    
+    
+    def check(num):
+        need = 0
+        
+        for summ, sign in l:
+            if summ >= num:
+                continue
+            
+            if sign == -1:
+                return False
+            
+            need += num - summ + 2 * sign
+        return need <= k
+    
+    
+    
+    right = left + k
+    ans = left
+    
+    while left <= right:
+        mid = (left + right) // 2 
+        if check(mid):
+            ans = mid
+            left = mid + 1
+        else:
+            right = mid - 1
+    
+    print(ans)
+    
+    
+    
+    
 
-    d.sort()
-
-    # If the smallest laboratory is stuck,
-    # nothing can make the answer larger than it.
-    if d[0][1] == 0:
-        print(d[0][0])
-        return
-
-    # We only need to work with active laboratories.
-    # Raise the smallest values toward the next value.
-    i = 0
-
-    while i < n - 1:
-        # If this laboratory is stuck, it becomes the final upper bound.
-        if d[i][1] == 0:
-            print(d[i][0])
-            return
-
-        # Number of active labs currently at this level.
-        j = i + 1
-        while j < n and d[j][0] == d[i][0] and d[j][1] == 1:
-            j += 1
-
-        # Find next different value.
-        if j == n:
-            break
-
-        diff = d[j][0] - d[i][0]
-        cnt = j - i
-
-        need = diff * cnt
-
-        if k < need:
-            print(d[i][0] + k // cnt)
-            return
-
-        k -= need
-        i = j
-
-    # All active laboratories are now at the same level,
-    # so distribute the remaining operations equally.
-    cnt = n - i
-
-    # If there are stuck laboratories after i, they cap the answer.
-    for j in range(i, n):
-        if d[j][1] == 0:
-            print(min(d[j][0], d[i][0] + k // cnt))
-            return
-
-    print(d[i][0] + k // cnt)
+    
 
 
 for _ in range(t):

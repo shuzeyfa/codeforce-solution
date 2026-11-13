@@ -21,23 +21,28 @@ t = getInt()
 def solve():
     n = getInt()
     l = getIntList()
+    l.sort()
     
-    d = Counter(l)
+    left = []
+    right = []
     
-    s = list(set(l))
-    s.sort()
     
-    rem = []
+    for i in l:
+        if not left:
+            left.append(i)
+        else:
+            if i == left[-1]:
+                right.append(i)
+            else:
+                left.append(i)
+                
+    right.sort(reverse=True)
     
-    for i in d:
-        rem += [i]*(d[i]-1)
-    rem.sort(reverse=True)
+    val = len(left) + len(set(right))
+    print(val)
+    print(*(left+right))
     
-    ans = s[:] + rem
-    
-    print(len(set(rem)) + len(s))
-    print(*ans)
-    # print()
+                
     
     
         
