@@ -1,4 +1,3 @@
-
 import sys, os
 import math
 from collections import defaultdict, deque, Counter
@@ -24,20 +23,34 @@ def solve():
     
     ans = 0
     
-    used = False
+    minn = [l[-1]]
     
     for i in range(n-2, -1, -1):
-        if l[i] < l[i+1]:
-            continue
+        val = min(minn[-1], l[i])
+        minn.append(val)
         
-        if not used:
-            used = True
-            l[i+1] -= 1
-        val = l[i] - l[i+1]
-        l[i] -= val
-        ans += val
+    minn.reverse()    
+    longest = 0
     
-    print(ans)
+    ans = sum(l) - sum(minn)
+    
+    ind = 0
+    
+    while ind < n:
+        
+        i = ind
+        while i < n and minn[i] == minn[ind]:
+            i += 1
+        longest = max(longest, i - ind)
+        ind = i
+        
+    print(ans + longest - 1)
+    
+    
+        
+        
+        
+    
         
     
     
