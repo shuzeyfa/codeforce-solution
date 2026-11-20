@@ -22,16 +22,6 @@ def solve():
     n = getInt()
     l = getIntList()
 
-    if n == 1:
-        print("NO")
-        return
-
-    if n == 2:
-        if l[0] == l[1]:
-            print("YES")
-        else:
-            print("NO")
-        return
 
     odd = even = 0
 

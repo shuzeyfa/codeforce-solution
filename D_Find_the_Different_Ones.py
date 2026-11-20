@@ -21,67 +21,33 @@ t = getInt()
 def solve():
     n = getInt()
     l = getIntList()
-
-    pre = []
-    suf = []
-
-    val = l[0]
-    start = True
-    ind = -1
-
-    i = 0
-
-    while i < n:
-        
-        if val == l[i] and start:
-            pre.append(-1)
-            i += 1
-            ind = i 
-        else:
-            start = False
-            val = l[i] 
-            while i < n and val == l[i]:
-                pre.append(ind)
-                i += 1
-            ind = i 
     
-    i = n - 1
-    start = True
-    val = l[-1]
-    ind = n + 1
-
-    while i >= 0:
-        
-        if val == l[i] and start:
-            suf.append(-1)
-            ind -= 1
-            i -= 1
+    dif = [0]
+    
+    for i in range(1, n):
+        if l[i] != l[i-1]:
+            dif.append(i)
         else:
-            start = False
-            val = l[i] 
-            while i >= 0 and val == l[i]:
-                suf.append(ind)
-                i -= 1
-            ind -= 1
-        # print(ind)
-
-    suf.reverse()
-    # print(suf)
-
-
-    q = getInt()
-    for query in range(q):
+            dif.append(dif[-1])
+    # print(dif)
+    ind = [0]
+    
+    for i in range(1, n):
+        if l[i] != l[i-1]:
+            ind.append(i)
+    # print(ind)
+    
+    for i in range(getInt()):
         left, right = getIntList()
-        if pre[right-1] != -1 and pre[right-1] >= left:
-            print(pre[right-1], right)
-        elif suf[left-1] != -1 and suf[left-1] <= right:
-            print(left, suf[left-1])
-        else:
+        
+        index = dif[left-1]
+        place_of_index_in_ind = bisect_left(ind, index)
+        if place_of_index_in_ind+1 == len(ind) or ind[place_of_index_in_ind+1] >= right:
             print(-1, -1)
-
-
-    print()       
-
+        else:
+            print(left, ind[place_of_index_in_ind+1]+1)
+        
+    print()
     
 
 
