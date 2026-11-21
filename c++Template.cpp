@@ -9,6 +9,9 @@ using vll = vector<ll>;
 using pii = pair<int, int>;
 
 #define all(v) (v).begin(), (v).end()
+#define rall(x) (x).rbegin(), (x).rend()
+#define bisect_left(v, x) (int)(lower_bound((v).begin(), (v).end(), (x)) - (v).begin())
+#define bisect_right(v, x) (int)(upper_bound((v).begin(), (v).end(), (x)) - (v).begin())
 
 // Constants
 const int MOD = 1e9 + 7;
