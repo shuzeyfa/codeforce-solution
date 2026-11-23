@@ -62,7 +62,7 @@ void print(const vector<T>& a) {
 void solve() {
 
     int n = getInt();
-    vi a = getIntList(n);
+    vi l = getIntList(n);
 
 }
 
