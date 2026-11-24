@@ -49,11 +49,10 @@ vll getLLList(int n) {
     return a;
 }
 
-template <typename T>
-void print(const vector<T>& a) {
-    for (int i = 0; i < (int)a.size(); i++) {
-        if (i > 0) cout << " ";
-        cout << a[i];
+template <typename Container>
+void print(const Container& a) {
+    for (const auto& x : a) {
+        cout << x << " ";
     }
     cout << "\n";
 }
